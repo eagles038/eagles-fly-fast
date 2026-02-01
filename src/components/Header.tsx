@@ -2,6 +2,7 @@ import { ShoppingCart, Menu, X, Phone, MapPin, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { useCartStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
+import logo from '@/assets/logo.png';
 
 const navLinks = [
   { href: '#menu', label: 'Меню' },
@@ -50,13 +51,12 @@ export function Header() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-2">
-              <span className="text-2xl md:text-3xl font-black text-primary">
-                Eagles
-              </span>
-              <span className="text-2xl md:text-3xl font-black text-foreground">
-                Food
-              </span>
+            <a href="#" className="flex items-center">
+              <img 
+                src={logo} 
+                alt="Eagles Food" 
+                className="h-10 md:h-14 w-auto"
+              />
             </a>
 
             {/* Desktop Navigation */}
