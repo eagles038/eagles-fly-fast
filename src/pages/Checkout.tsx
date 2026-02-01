@@ -175,7 +175,7 @@ export default function Checkout() {
     <div className="min-h-screen bg-secondary/30">
       <Header />
       
-      <main className="pt-28 pb-20">
+      <main className="pt-32 pb-20">
         <div className="container mx-auto px-4">
           {/* Back button */}
           <button 
