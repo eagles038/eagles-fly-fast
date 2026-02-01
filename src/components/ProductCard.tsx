@@ -56,10 +56,7 @@ export function ProductCard({
     return price;
   };
 
-  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // Remove focus from button to prevent ring staying visible
-    e.currentTarget.blur();
-    
+  const handleAddToCart = () => {
     const currentPrice = getCurrentPrice();
     for (let i = 0; i < localQuantity; i++) {
       addItem({ 
