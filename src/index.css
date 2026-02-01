@@ -44,6 +44,8 @@
     --orange-dark: 20 100% 40%;
     --warm-gray: 30 10% 50%;
     --cream: 40 30% 97%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
     
     /* Shadows */
     --shadow-sm: 0 2px 8px -2px hsl(var(--foreground) / 0.08);
@@ -92,6 +94,8 @@
     
     --orange-light: 24 100% 15%;
     --cream: 0 0% 10%;
+    --success: 142 76% 46%;
+    --success-foreground: 0 0% 100%;
     
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;

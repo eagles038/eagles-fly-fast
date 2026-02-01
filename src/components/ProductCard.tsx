@@ -45,6 +45,7 @@ export function ProductCard({
   const [selectedSize, setSelectedSize] = useState(sizes?.[0]?.size || null);
   const [selectedPieces, setSelectedPieces] = useState(piecesOptions?.[0]?.pieces || null);
   const [localQuantity, setLocalQuantity] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
 
   const getCurrentPrice = () => {
     if (sizes && selectedSize) {
@@ -80,6 +81,10 @@ export function ProductCard({
       },
     });
     setLocalQuantity(1);
+    
+    // Trigger animation
+    setIsAdded(true);
+    setTimeout(() => setIsAdded(false), 600);
   };
 
   const getBadgeContent = () => {
@@ -193,9 +198,17 @@ export function ProductCard({
             
             <Button
               onClick={handleAddToCart}
-              className="rounded-xl bg-primary hover:bg-orange-dark text-primary-foreground font-semibold px-4 py-2 transition-all hover:scale-105"
+              className={cn(
+                "rounded-xl font-semibold px-4 py-2 transition-all",
+                isAdded 
+                  ? "bg-success hover:bg-success/90 scale-110 animate-pulse" 
+                  : "bg-primary hover:bg-orange-dark hover:scale-105"
+              )}
             >
-              <ShoppingCart className="w-5 h-5" />
+              <ShoppingCart className={cn(
+                "w-5 h-5 transition-transform",
+                isAdded && "animate-bounce"
+              )} />
             </Button>
           </div>
         </div>
