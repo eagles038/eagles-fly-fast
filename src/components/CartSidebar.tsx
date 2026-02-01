@@ -38,46 +38,54 @@ export function CartSidebar() {
         ) : (
           <>
             <div className="flex-1 overflow-y-auto py-4 space-y-4">
-              {items.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex gap-4 p-3 bg-secondary rounded-xl animate-fade-in"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-20 h-20 rounded-lg object-cover"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold truncate">{item.name}</h4>
-                    <p className="text-primary font-bold">{item.price} ₽</p>
+              {items.map((item) => {
+                const uniqueId = item.size 
+                  ? `${item.id}-${item.size}` 
+                  : item.pieces 
+                  ? `${item.id}-${item.pieces}pcs` 
+                  : item.id;
+                
+                return (
+                  <div
+                    key={uniqueId}
+                    className="flex gap-4 p-3 bg-secondary rounded-xl animate-fade-in"
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-20 h-20 rounded-lg object-cover"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold truncate">{item.name}</h4>
+                      <p className="text-primary font-bold">{item.price} ₽</p>
 
-                    <div className="flex items-center gap-2 mt-2">
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="w-8 h-8 rounded-lg bg-background flex items-center justify-center hover:bg-muted transition-colors"
-                      >
-                        <Minus className="w-4 h-4" />
-                      </button>
-                      <span className="w-8 text-center font-semibold">
-                        {item.quantity}
-                      </span>
-                      <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="w-8 h-8 rounded-lg bg-background flex items-center justify-center hover:bg-muted transition-colors"
-                      >
-                        <Plus className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => removeItem(item.id)}
-                        className="w-8 h-8 rounded-lg bg-destructive/10 text-destructive flex items-center justify-center hover:bg-destructive/20 transition-colors ml-auto"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                      <div className="flex items-center gap-2 mt-2">
+                        <button
+                          onClick={() => updateQuantity(uniqueId, item.quantity - 1)}
+                          className="w-8 h-8 rounded-lg bg-background flex items-center justify-center hover:bg-muted transition-colors"
+                        >
+                          <Minus className="w-4 h-4" />
+                        </button>
+                        <span className="w-8 text-center font-semibold">
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() => updateQuantity(uniqueId, item.quantity + 1)}
+                          className="w-8 h-8 rounded-lg bg-background flex items-center justify-center hover:bg-muted transition-colors"
+                        >
+                          <Plus className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => removeItem(uniqueId)}
+                          className="w-8 h-8 rounded-lg bg-destructive/10 text-destructive flex items-center justify-center hover:bg-destructive/20 transition-colors ml-auto"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="border-t border-border pt-4 space-y-4">
