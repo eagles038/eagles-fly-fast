@@ -273,7 +273,7 @@ function MenuCategorySection({ category }: { category: MenuCategory }) {
   return (
     <section
       id={category.id}
-      className="py-12 md:py-16 even:bg-secondary/30"
+      className="py-12 md:py-16 even:bg-secondary/30 scroll-mt-32 md:scroll-mt-36"
     >
       <div className="container mx-auto px-4">
         <div className="mb-8 md:mb-10">
