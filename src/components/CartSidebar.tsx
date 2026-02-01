@@ -81,7 +81,7 @@ export function CartSidebar() {
 
   return (
     <Sheet open={isOpen} onOpenChange={closeCart}>
-      <SheetContent className="w-full sm:max-w-lg flex flex-col p-0 gap-0">
+      <SheetContent className="w-full sm:max-w-lg flex flex-col p-0 gap-0 h-full max-h-[100dvh]">
         {/* Header */}
         <SheetHeader className="p-6 pb-4 border-b border-border">
           <SheetTitle className="flex items-center justify-between">
@@ -133,7 +133,7 @@ export function CartSidebar() {
             </div>
 
             {/* Cart Items */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto min-h-0">
               <div className="p-6 space-y-3">
                 {items.map((item) => {
                   const uniqueId = item.size 
@@ -228,7 +228,7 @@ export function CartSidebar() {
             </div>
 
             {/* Footer */}
-            <div className="border-t border-border p-6 space-y-4 bg-background">
+            <div className="border-t border-border p-4 sm:p-6 space-y-3 sm:space-y-4 bg-background flex-shrink-0">
               {/* Promo Code */}
               <div className="space-y-2">
                 {appliedPromo ? (
