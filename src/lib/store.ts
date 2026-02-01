@@ -6,6 +6,8 @@ export interface CartItem {
   price: number;
   image: string;
   quantity: number;
+  size?: string;
+  pieces?: number;
 }
 
 interface CartStore {
@@ -28,12 +30,32 @@ export const useCartStore = create<CartStore>((set, get) => ({
   
   addItem: (item) => {
     set((state) => {
-      const existingItem = state.items.find((i) => i.id === item.id);
+      // Create unique id based on item id + size or pieces
+      const uniqueId = item.size 
+        ? `${item.id}-${item.size}` 
+        : item.pieces 
+        ? `${item.id}-${item.pieces}pcs` 
+        : item.id;
+      
+      const existingItem = state.items.find((i) => {
+        const existingUniqueId = i.size 
+          ? `${i.id}-${i.size}` 
+          : i.pieces 
+          ? `${i.id}-${i.pieces}pcs` 
+          : i.id;
+        return existingUniqueId === uniqueId;
+      });
+      
       if (existingItem) {
         return {
-          items: state.items.map((i) =>
-            i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-          ),
+          items: state.items.map((i) => {
+            const iUniqueId = i.size 
+              ? `${i.id}-${i.size}` 
+              : i.pieces 
+              ? `${i.id}-${i.pieces}pcs` 
+              : i.id;
+            return iUniqueId === uniqueId ? { ...i, quantity: i.quantity + 1 } : i;
+          }),
         };
       }
       return { items: [...state.items, { ...item, quantity: 1 }] };
@@ -42,7 +64,14 @@ export const useCartStore = create<CartStore>((set, get) => ({
   
   removeItem: (id) => {
     set((state) => ({
-      items: state.items.filter((item) => item.id !== id),
+      items: state.items.filter((item) => {
+        const uniqueId = item.size 
+          ? `${item.id}-${item.size}` 
+          : item.pieces 
+          ? `${item.id}-${item.pieces}pcs` 
+          : item.id;
+        return uniqueId !== id;
+      }),
     }));
   },
   
@@ -52,9 +81,14 @@ export const useCartStore = create<CartStore>((set, get) => ({
       return;
     }
     set((state) => ({
-      items: state.items.map((item) =>
-        item.id === id ? { ...item, quantity } : item
-      ),
+      items: state.items.map((item) => {
+        const uniqueId = item.size 
+          ? `${item.id}-${item.size}` 
+          : item.pieces 
+          ? `${item.id}-${item.pieces}pcs` 
+          : item.id;
+        return uniqueId === id ? { ...item, quantity } : item;
+      }),
     }));
   },
   

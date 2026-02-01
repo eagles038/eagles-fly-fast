@@ -9,6 +9,9 @@ import burgerChicken from '@/assets/burger-chicken.jpg';
 import drinkCola from '@/assets/drink-cola.jpg';
 import drinkJuice from '@/assets/drink-juice.jpg';
 import drinkMilkshake from '@/assets/drink-milkshake.jpg';
+import rollPhiladelphia from '@/assets/roll-philadelphia.jpg';
+import rollCalifornia from '@/assets/roll-california.jpg';
+import rollDragon from '@/assets/roll-dragon.jpg';
 
 const menuItems = {
   pizza: [
@@ -16,22 +19,80 @@ const menuItems = {
       id: 'pizza-1',
       name: 'Пепперони',
       description: 'Пикантная пепперони, моцарелла, томатный соус, орегано',
-      price: 599,
+      price: 499,
       image: pizzaPepperoni,
+      badge: 'hit' as const,
+      sizes: [
+        { size: '25 см', price: 499 },
+        { size: '30 см', price: 699 },
+        { size: '40 см', price: 999 },
+      ],
     },
     {
       id: 'pizza-2',
       name: 'Маргарита',
       description: 'Свежие томаты, моцарелла, базилик, оливковое масло',
-      price: 499,
+      price: 399,
       image: pizzaMargherita,
+      sizes: [
+        { size: '25 см', price: 399 },
+        { size: '30 см', price: 549 },
+        { size: '40 см', price: 799 },
+      ],
     },
     {
       id: 'pizza-3',
       name: 'BBQ Курица',
       description: 'Курица гриль, соус BBQ, кукуруза, красный лук, сыр',
-      price: 649,
+      price: 549,
       image: pizzaBbq,
+      badge: 'new' as const,
+      sizes: [
+        { size: '25 см', price: 549 },
+        { size: '30 см', price: 749 },
+        { size: '40 см', price: 1099 },
+      ],
+    },
+  ],
+  rolls: [
+    {
+      id: 'roll-1',
+      name: 'Филадельфия',
+      description: 'Лосось, сливочный сыр, огурец, рис, нори',
+      price: 349,
+      image: rollPhiladelphia,
+      badge: 'hit' as const,
+      piecesOptions: [
+        { pieces: 6, price: 349 },
+        { pieces: 8, price: 449 },
+        { pieces: 12, price: 649 },
+      ],
+    },
+    {
+      id: 'roll-2',
+      name: 'Калифорния',
+      description: 'Краб, авокадо, огурец, тобико, кунжут',
+      price: 299,
+      image: rollCalifornia,
+      piecesOptions: [
+        { pieces: 6, price: 299 },
+        { pieces: 8, price: 389 },
+        { pieces: 12, price: 549 },
+      ],
+    },
+    {
+      id: 'roll-3',
+      name: 'Дракон',
+      description: 'Угорь, авокадо, огурец, унаги соус, кунжут',
+      price: 449,
+      image: rollDragon,
+      badge: 'new' as const,
+      oldPrice: 549,
+      piecesOptions: [
+        { pieces: 6, price: 449 },
+        { pieces: 8, price: 579 },
+        { pieces: 12, price: 849 },
+      ],
     },
   ],
   burgers: [
@@ -41,6 +102,7 @@ const menuItems = {
       description: 'Две котлеты из говядины, чеддер, салат, томаты, соленые огурцы',
       price: 399,
       image: burgerClassic,
+      badge: 'hit' as const,
     },
     {
       id: 'burger-2',
@@ -48,6 +110,8 @@ const menuItems = {
       description: 'Говядина, халапеньо, бекон, острый соус, плавленый сыр',
       price: 449,
       image: burgerSpicy,
+      badge: 'sale' as const,
+      oldPrice: 549,
     },
     {
       id: 'burger-3',
@@ -71,6 +135,7 @@ const menuItems = {
       description: 'Свежевыжатый апельсиновый сок, 0.3л',
       price: 149,
       image: drinkJuice,
+      badge: 'new' as const,
     },
     {
       id: 'drink-3',
@@ -94,22 +159,28 @@ export function MenuSection() {
         </div>
 
         <Tabs defaultValue="pizza" className="w-full">
-          <TabsList className="w-full max-w-md mx-auto mb-8 h-14 rounded-2xl bg-secondary p-1">
+          <TabsList className="w-full max-w-2xl mx-auto mb-8 h-14 rounded-2xl bg-secondary p-1 grid grid-cols-4">
             <TabsTrigger
               value="pizza"
-              className="flex-1 rounded-xl text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
+              className="rounded-xl text-sm md:text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
             >
               Пицца
             </TabsTrigger>
             <TabsTrigger
+              value="rolls"
+              className="rounded-xl text-sm md:text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
+            >
+              Роллы
+            </TabsTrigger>
+            <TabsTrigger
               value="burgers"
-              className="flex-1 rounded-xl text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
+              className="rounded-xl text-sm md:text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
             >
               Бургеры
             </TabsTrigger>
             <TabsTrigger
               value="drinks"
-              className="flex-1 rounded-xl text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
+              className="rounded-xl text-sm md:text-base font-semibold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all"
             >
               Напитки
             </TabsTrigger>
