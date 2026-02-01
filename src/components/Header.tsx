@@ -60,6 +60,12 @@ export function Header() {
                 >
                   Отзывы
                 </a>
+                <a
+                  href="/contacts"
+                  className="hover:text-primary transition-colors"
+                >
+                  Контакты
+                </a>
               </div>
               <a 
                 href="tel:+78001234567" 
