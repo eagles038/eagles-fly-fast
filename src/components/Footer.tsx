@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import logo from '@/assets/logo.png';
 
 export function Footer() {
   return (
@@ -7,9 +8,12 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl font-black text-primary">Eagles</span>
-              <span className="text-2xl font-black">Food</span>
+            <div className="mb-4">
+              <img 
+                src={logo} 
+                alt="Eagles Food" 
+                className="h-14 w-auto"
+              />
             </div>
             <p className="text-background/70 mb-6">
               Вкуснейшая пицца и сочные бургеры с доставкой за 30 минут
