@@ -43,6 +43,22 @@ export function Header() {
                   <span>Сб-Вс: 11:00 — 00:00</span>
                 </div>
               </div>
+              <div className="hidden lg:flex items-center gap-4 ml-2">
+                <a
+                  href="#promotions"
+                  onClick={(e) => handleSmoothScroll(e, '#promotions')}
+                  className="hover:text-primary transition-colors"
+                >
+                  Акции
+                </a>
+                <a
+                  href="#reviews"
+                  onClick={(e) => handleSmoothScroll(e, '#reviews')}
+                  className="hover:text-primary transition-colors"
+                >
+                  Отзывы
+                </a>
+              </div>
             </div>
             <a 
               href="tel:+78001234567" 
