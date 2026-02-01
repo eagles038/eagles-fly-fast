@@ -61,6 +61,12 @@ export function Header() {
                   Отзывы
                 </a>
                 <a
+                  href="/delivery"
+                  className="hover:text-primary transition-colors"
+                >
+                  Доставка
+                </a>
+                <a
                   href="/contacts"
                   className="hover:text-primary transition-colors"
                 >
