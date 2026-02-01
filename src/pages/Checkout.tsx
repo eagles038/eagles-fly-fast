@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -7,8 +9,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Progress } from '@/components/ui/progress';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useCartStore } from '@/lib/store';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
 import { 
   Truck, 
   Store, 
@@ -28,7 +33,8 @@ import {
   ArrowLeft,
   CreditCard,
   Banknote,
-  Wallet
+  Wallet,
+  CalendarIcon
 } from 'lucide-react';
 
 import drinkCola from '@/assets/drink-cola.jpg';
@@ -67,6 +73,7 @@ export default function Checkout() {
   const [floor, setFloor] = useState('');
   const [comment, setComment] = useState('');
   const [deliveryTime, setDeliveryTime] = useState<'asap' | 'scheduled'>('asap');
+  const [scheduledDate, setScheduledDate] = useState<Date>();
   const [scheduledTime, setScheduledTime] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'card_courier' | 'online'>('cash');
   
@@ -447,16 +454,47 @@ export default function Checkout() {
                       <RadioGroupItem value="asap" id="asap" />
                       <Label htmlFor="asap" className="cursor-pointer flex-1">Как можно скорее</Label>
                     </div>
-                    <div className="flex items-center space-x-3 p-3 bg-secondary/30 rounded-xl mt-2">
-                      <RadioGroupItem value="scheduled" id="scheduled" />
-                      <Label htmlFor="scheduled" className="cursor-pointer">Ко времени</Label>
+                    <div className="flex flex-col p-3 bg-secondary/30 rounded-xl mt-2">
+                      <div className="flex items-center space-x-3">
+                        <RadioGroupItem value="scheduled" id="scheduled" />
+                        <Label htmlFor="scheduled" className="cursor-pointer">Ко времени</Label>
+                      </div>
                       {deliveryTime === 'scheduled' && (
-                        <Input
-                          type="time"
-                          value={scheduledTime}
-                          onChange={(e) => setScheduledTime(e.target.value)}
-                          className="w-32 rounded-xl h-10 ml-auto"
-                        />
+                        <div className="flex flex-wrap gap-3 mt-4 ml-6">
+                          {/* Date Picker */}
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                className={cn(
+                                  "w-[180px] justify-start text-left font-normal rounded-xl h-11",
+                                  !scheduledDate && "text-muted-foreground"
+                                )}
+                              >
+                                <CalendarIcon className="mr-2 h-4 w-4" />
+                                {scheduledDate ? format(scheduledDate, "d MMMM", { locale: ru }) : "Выберите дату"}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                              <Calendar
+                                mode="single"
+                                selected={scheduledDate}
+                                onSelect={setScheduledDate}
+                                disabled={(date) => date < new Date()}
+                                initialFocus
+                                className={cn("p-3 pointer-events-auto")}
+                              />
+                            </PopoverContent>
+                          </Popover>
+                          
+                          {/* Time Picker */}
+                          <Input
+                            type="time"
+                            value={scheduledTime}
+                            onChange={(e) => setScheduledTime(e.target.value)}
+                            className="w-32 rounded-xl h-11"
+                          />
+                        </div>
                       )}
                     </div>
                   </RadioGroup>
