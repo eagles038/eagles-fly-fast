@@ -27,8 +27,8 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       {/* Top Bar - Contact Info */}
-      <div className="bg-foreground text-background text-base">
-        <div className="container mx-auto px-4 py-[0.4rem]">
+      <div className="bg-foreground text-background">
+        <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-10 text-sm">
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2">
