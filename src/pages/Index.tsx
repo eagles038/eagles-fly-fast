@@ -7,6 +7,7 @@ import { PromotionsSection } from '@/components/PromotionsSection';
 import { ReviewsSection } from '@/components/ReviewsSection';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
+import { MobileCartButton } from '@/components/MobileCartButton';
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
       </main>
       <Footer />
       <CartSidebar />
+      <MobileCartButton />
     </div>
   );
 };
