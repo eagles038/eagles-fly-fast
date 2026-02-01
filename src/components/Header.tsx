@@ -5,11 +5,19 @@ import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
 
 const navLinks = [
-  { href: '#menu', label: 'Меню' },
-  { href: '#promotions', label: 'Акции' },
-  { href: '#reviews', label: 'Отзывы' },
-  { href: '#contacts', label: 'Контакты' },
+  { href: '#pizza', label: 'Пицца' },
+  { href: '#rolls', label: 'Роллы' },
+  { href: '#burgers', label: 'Бургеры' },
+  { href: '#drinks', label: 'Напитки' },
 ];
+
+const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault();
+  const element = document.querySelector(href);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -61,10 +69,11 @@ export function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
+            {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
                   className="nav-link text-sm uppercase tracking-wide"
                 >
                   {link.label}
@@ -109,7 +118,10 @@ export function Header() {
                   <a
                     key={link.href}
                     href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={(e) => {
+                      handleSmoothScroll(e, link.href);
+                      setMobileMenuOpen(false);
+                    }}
                     className="nav-link text-lg py-2"
                   >
                     {link.label}
