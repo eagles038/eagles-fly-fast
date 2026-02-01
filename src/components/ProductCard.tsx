@@ -41,11 +41,24 @@ export function ProductCard({
   sizes,
   piecesOptions,
 }: ProductCardProps) {
-  const { addItem, openCart } = useCartStore();
+  const { addItem, openCart, items } = useCartStore();
   const [selectedSize, setSelectedSize] = useState(sizes?.[0]?.size || null);
   const [selectedPieces, setSelectedPieces] = useState(piecesOptions?.[0]?.pieces || null);
   const [localQuantity, setLocalQuantity] = useState(1);
-  const [justAdded, setJustAdded] = useState(false);
+
+  const isInCart = items.some((item) => {
+    const uniqueId = item.size 
+      ? `${item.id}-${item.size}` 
+      : item.pieces 
+      ? `${item.id}-${item.pieces}pcs` 
+      : item.id;
+    const currentUniqueId = selectedSize 
+      ? `${id}-${selectedSize}` 
+      : selectedPieces 
+      ? `${id}-${selectedPieces}pcs` 
+      : id;
+    return uniqueId === currentUniqueId;
+  });
 
   const getCurrentPrice = () => {
     if (sizes && selectedSize) {
@@ -81,7 +94,6 @@ export function ProductCard({
       },
     });
     setLocalQuantity(1);
-    setJustAdded(true);
   };
 
   const getBadgeContent = () => {
@@ -197,7 +209,7 @@ export function ProductCard({
               onClick={handleAddToCart}
               className={cn(
                 "rounded-xl font-semibold px-4 py-2 transition-all hover:scale-105",
-                justAdded 
+                isInCart 
                   ? "bg-green-500 hover:bg-green-600 text-white" 
                   : "bg-primary hover:bg-orange-dark text-primary-foreground"
               )}
