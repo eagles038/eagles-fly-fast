@@ -109,12 +109,6 @@
     @apply border-border;
   }
 
-  html {
-    scroll-behavior: smooth;
-    /* Отступ для фиксированного хедера: ~40px top bar + ~80px nav */
-    scroll-padding-top: 140px;
-  }
-
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Montserrat', sans-serif;
