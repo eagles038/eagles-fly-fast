@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { Minus, Plus, Trash2, ShoppingBag, Truck, Sparkles } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Minus, Plus, Trash2, ShoppingBag, Truck, Sparkles, Tag, X, Check } from 'lucide-react';
 import { useCartStore } from '@/lib/store';
 import { toast } from 'sonner';
 import { Progress } from '@/components/ui/progress';
@@ -20,13 +22,46 @@ const FREE_DELIVERY_THRESHOLD = 1500;
 
 export function CartSidebar() {
   const { items, isOpen, closeCart, updateQuantity, removeItem, getTotalPrice, clearCart, addItem, openCart } = useCartStore();
+  const [promoCode, setPromoCode] = useState('');
+  const [appliedPromo, setAppliedPromo] = useState<{ code: string; discount: number } | null>(null);
+  const [promoError, setPromoError] = useState('');
+
   const totalPrice = getTotalPrice();
-  const remainingForFreeDelivery = Math.max(0, FREE_DELIVERY_THRESHOLD - totalPrice);
-  const deliveryProgress = Math.min(100, (totalPrice / FREE_DELIVERY_THRESHOLD) * 100);
+  const discountAmount = appliedPromo ? Math.round(totalPrice * appliedPromo.discount) : 0;
+  const finalPrice = totalPrice - discountAmount;
+  const remainingForFreeDelivery = Math.max(0, FREE_DELIVERY_THRESHOLD - finalPrice);
+  const deliveryProgress = Math.min(100, (finalPrice / FREE_DELIVERY_THRESHOLD) * 100);
+
+  // Демо промокоды
+  const validPromoCodes: Record<string, number> = {
+    'СКИДКА10': 0.10,
+    'СКИДКА20': 0.20,
+    'ПЕРВЫЙ': 0.15,
+  };
+
+  const handleApplyPromo = () => {
+    const code = promoCode.toUpperCase().trim();
+    if (validPromoCodes[code]) {
+      setAppliedPromo({ code, discount: validPromoCodes[code] });
+      setPromoError('');
+      toast.success(`Промокод применён! Скидка ${validPromoCodes[code] * 100}%`);
+    } else {
+      setPromoError('Промокод не найден');
+      setAppliedPromo(null);
+    }
+  };
+
+  const handleRemovePromo = () => {
+    setAppliedPromo(null);
+    setPromoCode('');
+    setPromoError('');
+  };
 
   const handleOrder = () => {
     toast.success('Спасибо за заказ! Мы свяжемся с вами в ближайшее время.');
     clearCart();
+    setAppliedPromo(null);
+    setPromoCode('');
     closeCart();
   };
 
@@ -185,17 +220,76 @@ export function CartSidebar() {
 
             {/* Footer */}
             <div className="border-t border-border p-6 space-y-4 bg-background">
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-muted-foreground text-sm">Итого</span>
-                  <p className="text-3xl font-bold text-primary">{totalPrice} ₽</p>
+              {/* Promo Code */}
+              <div className="space-y-2">
+                {appliedPromo ? (
+                  <div className="flex items-center justify-between p-3 bg-primary/10 rounded-xl border border-primary/20">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-primary" />
+                      <span className="font-medium text-sm">{appliedPromo.code}</span>
+                      <span className="text-primary font-bold">-{appliedPromo.discount * 100}%</span>
+                    </div>
+                    <button
+                      onClick={handleRemovePromo}
+                      className="w-6 h-6 rounded-full hover:bg-destructive/10 flex items-center justify-center transition-colors"
+                    >
+                      <X className="w-4 h-4 text-muted-foreground hover:text-destructive" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <div className="relative flex-1">
+                      <Tag className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <Input
+                        value={promoCode}
+                        onChange={(e) => {
+                          setPromoCode(e.target.value);
+                          setPromoError('');
+                        }}
+                        placeholder="Промокод"
+                        className={`pl-10 rounded-xl ${promoError ? 'border-destructive' : ''}`}
+                      />
+                    </div>
+                    <Button
+                      onClick={handleApplyPromo}
+                      variant="outline"
+                      className="rounded-xl px-4"
+                      disabled={!promoCode.trim()}
+                    >
+                      Применить
+                    </Button>
+                  </div>
+                )}
+                {promoError && (
+                  <p className="text-sm text-destructive">{promoError}</p>
+                )}
+              </div>
+
+              {/* Totals */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Сумма заказа</span>
+                  <span>{totalPrice} ₽</span>
                 </div>
-                <div className="text-right text-sm text-muted-foreground">
-                {remainingForFreeDelivery > 0 ? (
-                    <span>+ доставка 200 ₽</span>
+                {appliedPromo && (
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">Скидка</span>
+                    <span className="text-primary font-medium">-{discountAmount} ₽</span>
+                  </div>
+                )}
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Доставка</span>
+                  {remainingForFreeDelivery > 0 ? (
+                    <span>200 ₽</span>
                   ) : (
-                    <span className="text-primary font-medium">Доставка 0 ₽</span>
+                    <span className="text-primary font-medium">Бесплатно</span>
                   )}
+                </div>
+                <div className="flex items-center justify-between pt-2 border-t border-border">
+                  <span className="font-semibold">Итого</span>
+                  <p className="text-2xl font-bold text-primary">
+                    {remainingForFreeDelivery > 0 ? finalPrice + 200 : finalPrice} ₽
+                  </p>
                 </div>
               </div>
 
