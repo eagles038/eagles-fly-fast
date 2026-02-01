@@ -55,7 +55,7 @@ export function Header() {
               <img 
                 src={logo} 
                 alt="Eagles Food" 
-                className="h-24 md:h-32 w-auto"
+                className="h-12 md:h-16 w-auto"
               />
             </a>
 
