@@ -5,11 +5,15 @@ import { useCartStore } from '@/lib/store';
 import { toast } from 'sonner';
 import { Progress } from '@/components/ui/progress';
 
+import drinkCola from '@/assets/drink-cola.jpg';
+import drinkMilkshake from '@/assets/drink-milkshake.jpg';
+import drinkLemonade from '@/assets/drink-lemonade.jpg';
+
 // Рекомендуемые товары для допродажи
 const recommendedItems = [
-  { id: 'rec-cola', name: 'Coca-Cola', price: 99, image: '/placeholder.svg' },
-  { id: 'rec-sauce', name: 'Сырный соус', price: 49, image: '/placeholder.svg' },
-  { id: 'rec-dessert', name: 'Чизкейк', price: 199, image: '/placeholder.svg' },
+  { id: 'rec-cola', name: 'Coca-Cola', price: 99, image: drinkCola },
+  { id: 'rec-milkshake', name: 'Милкшейк', price: 199, image: drinkMilkshake },
+  { id: 'rec-lemonade', name: 'Лимонад', price: 149, image: drinkLemonade },
 ];
 
 const FREE_DELIVERY_THRESHOLD = 1500;
@@ -152,26 +156,26 @@ export function CartSidebar() {
 
               {/* Recommended Items */}
               <div className="px-6 pb-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <Sparkles className="w-4 h-4 text-primary" />
-                  <h4 className="font-semibold text-sm">Добавить к заказу</h4>
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-5 h-5 text-primary" />
+                  <h4 className="font-bold text-base">Добавить к заказу</h4>
                 </div>
-                <div className="flex gap-3 overflow-x-auto pb-2 -mx-6 px-6 scrollbar-hide">
+                <div className="flex gap-4 overflow-x-auto pb-3 -mx-6 px-6 scrollbar-hide">
                   {recommendedItems.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => handleAddRecommended(item)}
-                      className="flex-shrink-0 flex items-center gap-3 p-3 bg-secondary/50 hover:bg-secondary rounded-xl border border-border hover:border-primary/30 transition-all group"
+                      className="flex-shrink-0 flex flex-col w-32 p-3 bg-secondary/50 hover:bg-secondary rounded-2xl border border-border hover:border-primary/30 transition-all group hover:shadow-md"
                     >
-                      <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center overflow-hidden">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      <div className="w-full aspect-square rounded-xl bg-muted overflow-hidden mb-3">
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                       </div>
-                      <div className="text-left">
-                        <p className="font-medium text-sm">{item.name}</p>
-                        <p className="text-primary font-bold text-sm">{item.price} ₽</p>
+                      <div className="text-left flex-1">
+                        <p className="font-semibold text-sm leading-tight mb-1">{item.name}</p>
+                        <p className="text-primary font-bold">{item.price} ₽</p>
                       </div>
-                      <div className="w-7 h-7 rounded-full bg-primary/10 group-hover:bg-primary flex items-center justify-center transition-colors ml-2">
-                        <Plus className="w-4 h-4 text-primary group-hover:text-primary-foreground" />
+                      <div className="w-full h-9 rounded-xl bg-primary/10 group-hover:bg-primary flex items-center justify-center transition-colors mt-3">
+                        <Plus className="w-5 h-5 text-primary group-hover:text-primary-foreground" />
                       </div>
                     </button>
                   ))}
