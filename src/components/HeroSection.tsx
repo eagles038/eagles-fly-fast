@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button';
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from '@/components/ui/carousel';
 import heroImage from '@/assets/hero-food.jpg';
 import pizzaImage from '@/assets/pizza-pepperoni.jpg';
 import burgerImage from '@/assets/burger-classic.jpg';
 import Autoplay from 'embla-carousel-autoplay';
-import { useRef } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 
 const slides = [
   {
@@ -34,13 +34,31 @@ const slides = [
 ];
 
 export function HeroSection() {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  
   const plugin = useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true })
   );
 
+  useEffect(() => {
+    if (!api) return;
+
+    setCurrent(api.selectedScrollSnap());
+
+    api.on('select', () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  const scrollTo = useCallback((index: number) => {
+    api?.scrollTo(index);
+  }, [api]);
+
   return (
     <section className="relative min-h-screen pt-20">
       <Carousel
+        setApi={setApi}
         opts={{
           align: 'start',
           loop: true,
@@ -124,9 +142,15 @@ export function HeroSection() {
         {/* Dots indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {slides.map((_, index) => (
-            <div
+            <button
               key={index}
-              className="w-3 h-3 rounded-full bg-background/40 transition-colors"
+              onClick={() => scrollTo(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === current 
+                  ? 'bg-primary w-8' 
+                  : 'bg-background/40 hover:bg-background/60'
+              }`}
+              aria-label={`Перейти к слайду ${index + 1}`}
             />
           ))}
         </div>
