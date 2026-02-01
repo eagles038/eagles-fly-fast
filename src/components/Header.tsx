@@ -38,9 +38,10 @@ export function Header() {
               </div>
               <div className="hidden md:flex items-center gap-2">
                 <Clock className="w-4 h-4 text-primary" />
-                <span>Пн-Пт: 10:00 — 23:00</span>
-                <span className="text-muted-foreground">|</span>
-                <span>Сб-Вс: 11:00 — 00:00</span>
+                <div className="flex flex-col text-xs leading-tight">
+                  <span>Пн-Пт: 10:00 — 23:00</span>
+                  <span>Сб-Вс: 11:00 — 00:00</span>
+                </div>
               </div>
             </div>
             <a 
