@@ -2,15 +2,19 @@ import { ProductCard } from '@/components/ProductCard';
 import pizzaPepperoni from '@/assets/pizza-pepperoni.jpg';
 import pizzaMargherita from '@/assets/pizza-margherita.jpg';
 import pizzaBbq from '@/assets/pizza-bbq.jpg';
+import pizza4cheese from '@/assets/pizza-4cheese.jpg';
 import burgerClassic from '@/assets/burger-classic.jpg';
 import burgerSpicy from '@/assets/burger-spicy.jpg';
 import burgerChicken from '@/assets/burger-chicken.jpg';
+import burgerDouble from '@/assets/burger-double.jpg';
 import drinkCola from '@/assets/drink-cola.jpg';
 import drinkJuice from '@/assets/drink-juice.jpg';
 import drinkMilkshake from '@/assets/drink-milkshake.jpg';
+import drinkLemonade from '@/assets/drink-lemonade.jpg';
 import rollPhiladelphia from '@/assets/roll-philadelphia.jpg';
 import rollCalifornia from '@/assets/roll-california.jpg';
 import rollDragon from '@/assets/roll-dragon.jpg';
+import rollUnagi from '@/assets/roll-unagi.jpg';
 
 const menuCategories = [
   {
@@ -54,6 +58,18 @@ const menuCategories = [
           { size: '25 см', price: 549 },
           { size: '30 см', price: 749 },
           { size: '40 см', price: 1099 },
+        ],
+      },
+      {
+        id: 'pizza-4',
+        name: '4 сыра',
+        description: 'Моцарелла, пармезан, горгонзола, чеддер на сливочной основе',
+        price: 599,
+        image: pizza4cheese,
+        sizes: [
+          { size: '25 см', price: 599 },
+          { size: '30 см', price: 799 },
+          { size: '40 см', price: 1149 },
         ],
       },
     ],
@@ -102,6 +118,20 @@ const menuCategories = [
           { pieces: 12, price: 849 },
         ],
       },
+      {
+        id: 'roll-4',
+        name: 'Унаги',
+        description: 'Копчёный угорь, сливочный сыр, авокадо, соус унаги',
+        price: 479,
+        image: rollUnagi,
+        badge: 'sale' as const,
+        oldPrice: 579,
+        piecesOptions: [
+          { pieces: 6, price: 479 },
+          { pieces: 8, price: 619 },
+          { pieces: 12, price: 899 },
+        ],
+      },
     ],
   },
   {
@@ -133,6 +163,14 @@ const menuCategories = [
         price: 379,
         image: burgerChicken,
       },
+      {
+        id: 'burger-4',
+        name: 'Двойной',
+        description: 'Двойная котлета, двойной сыр, бекон, фирменный соус',
+        price: 549,
+        image: burgerDouble,
+        badge: 'new' as const,
+      },
     ],
   },
   {
@@ -161,6 +199,14 @@ const menuCategories = [
         description: 'Ванильный молочный коктейль со взбитыми сливками',
         price: 199,
         image: drinkMilkshake,
+      },
+      {
+        id: 'drink-4',
+        name: 'Лимонад',
+        description: 'Домашний лимонад с мятой и льдом, 0.4л',
+        price: 129,
+        image: drinkLemonade,
+        badge: 'hit' as const,
       },
     ],
   },
