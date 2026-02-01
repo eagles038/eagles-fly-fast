@@ -4,11 +4,18 @@ import { useCartStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
 
-const navLinks = [
+const menuNavLinks = [
   { href: '#pizza', label: 'Пицца' },
   { href: '#rolls', label: 'Роллы' },
   { href: '#burgers', label: 'Бургеры' },
   { href: '#drinks', label: 'Напитки' },
+];
+
+const topBarLinks = [
+  { href: '#promotions', label: 'Акции', isAnchor: true },
+  { href: '#reviews', label: 'Отзывы', isAnchor: true },
+  { href: '/delivery', label: 'Доставка', isAnchor: false },
+  { href: '/contacts', label: 'Контакты', isAnchor: false },
 ];
 
 const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -46,40 +53,24 @@ export function Header() {
             </div>
             <div className="flex items-center gap-2 sm:gap-10">
               <div className="hidden lg:flex items-center gap-4">
-                <a
-                  href="#promotions"
-                  onClick={(e) => handleSmoothScroll(e, '#promotions')}
-                  className="hover:text-primary transition-colors"
-                >
-                  Акции
-                </a>
-                <a
-                  href="#reviews"
-                  onClick={(e) => handleSmoothScroll(e, '#reviews')}
-                  className="hover:text-primary transition-colors"
-                >
-                  Отзывы
-                </a>
-                <a
-                  href="/delivery"
-                  className="hover:text-primary transition-colors"
-                >
-                  Доставка
-                </a>
-                <a
-                  href="/contacts"
-                  className="hover:text-primary transition-colors"
-                >
-                  Контакты
-                </a>
+                {topBarLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={link.isAnchor ? (e) => handleSmoothScroll(e, link.href) : undefined}
+                    className="hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
               <a 
                 href="tel:+78001234567" 
                 className="flex items-center gap-1 sm:gap-2 font-semibold hover:text-primary transition-colors"
               >
                 <Phone className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
-                <span className="hidden xs:inline">8 800 123-45-67</span>
-                <span className="xs:hidden">Позвонить</span>
+                <span className="hidden sm:inline">8 800 123-45-67</span>
+                <span className="sm:hidden">Звонок</span>
               </a>
             </div>
           </div>
@@ -101,7 +92,7 @@ export function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+              {menuNavLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -145,24 +136,58 @@ export function Header() {
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
             <nav className="md:hidden py-4 border-t border-border animate-fade-in">
-              <div className="flex flex-col gap-4">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={(e) => {
-                      handleSmoothScroll(e, link.href);
-                      setMobileMenuOpen(false);
-                    }}
-                    className="nav-link text-lg py-2"
-                  >
-                    {link.label}
+              <div className="flex flex-col gap-2">
+                {/* Menu Categories */}
+                <div className="pb-3 border-b border-border">
+                  <span className="text-xs text-muted-foreground uppercase tracking-wide mb-2 block">Меню</span>
+                  {menuNavLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={(e) => {
+                        handleSmoothScroll(e, link.href);
+                        setMobileMenuOpen(false);
+                      }}
+                      className="nav-link text-base py-2 block"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+                
+                {/* Top bar links */}
+                <div className="py-3 border-b border-border">
+                  {topBarLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={(e) => {
+                        if (link.isAnchor) {
+                          handleSmoothScroll(e, link.href);
+                        }
+                        setMobileMenuOpen(false);
+                      }}
+                      className="nav-link text-base py-2 block"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+
+                {/* Contact info */}
+                <div className="pt-2 space-y-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-primary" />
+                    <span>г. Москва, ул. Ленина 25</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-primary" />
+                    <span>Пн-Пт: 10:00 — 23:00 | Сб-Вс: 11:00 — 00:00</span>
+                  </div>
+                  <a href="tel:+78001234567" className="flex items-center gap-2 text-foreground font-semibold">
+                    <Phone className="w-4 h-4 text-primary" />
+                    <span>8 800 123-45-67</span>
                   </a>
-                ))}
-                {/* Mobile time info */}
-                <div className="flex items-center gap-2 text-muted-foreground pt-4 border-t border-border">
-                  <Clock className="w-4 h-4" />
-                  <span className="text-sm">Пн-Пт: 10:00 — 23:00 | Сб-Вс: 11:00 — 00:00</span>
                 </div>
               </div>
             </nav>
