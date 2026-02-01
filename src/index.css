@@ -111,8 +111,8 @@
 
   html {
     scroll-behavior: smooth;
-    /* Отступ для фиксированного хедера: ~40px top bar + ~80px nav */
-    scroll-padding-top: 140px;
+    /* Отступ для фиксированного хедера: top bar + nav + запас */
+    scroll-padding-top: 160px;
   }
 
   body {
