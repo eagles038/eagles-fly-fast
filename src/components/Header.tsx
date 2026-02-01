@@ -49,7 +49,7 @@ export function Header() {
       {/* Main Navigation Bar */}
       <div className="bg-background/95 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-28 md:h-36">
+          <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <a href="#" className="flex items-center">
               <img 
