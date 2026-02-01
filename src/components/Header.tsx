@@ -1,4 +1,4 @@
-import { ShoppingCart, Menu, X } from 'lucide-react';
+import { ShoppingCart, Menu, X, Phone, MapPin, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { useCartStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
@@ -16,79 +16,114 @@ export function Header() {
   const totalItems = getTotalItems();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
-            <span className="text-2xl md:text-3xl font-black text-primary">
-              Eagles
-            </span>
-            <span className="text-2xl md:text-3xl font-black text-foreground">
-              Food
-            </span>
-          </a>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="nav-link text-sm uppercase tracking-wide"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Cart Button */}
-          <div className="flex items-center gap-4">
-            <Button
-              onClick={openCart}
-              variant="outline"
-              size="icon"
-              className="relative rounded-xl border-2 border-primary hover:bg-primary hover:text-primary-foreground transition-all"
+    <header className="fixed top-0 left-0 right-0 z-50">
+      {/* Top Bar - Contact Info */}
+      <div className="bg-foreground text-background">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-10 text-sm">
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-primary" />
+                <span className="hidden sm:inline">г. Москва, ул. Ленина 25</span>
+                <span className="sm:hidden">Москва</span>
+              </div>
+              <div className="hidden md:flex items-center gap-2">
+                <Clock className="w-4 h-4 text-primary" />
+                <span>Пн-Пт: 10:00 — 23:00</span>
+                <span className="text-muted-foreground">|</span>
+                <span>Сб-Вс: 11:00 — 00:00</span>
+              </div>
+            </div>
+            <a 
+              href="tel:+78001234567" 
+              className="flex items-center gap-2 font-semibold hover:text-primary transition-colors"
             >
-              <ShoppingCart className="h-5 w-5" />
-              {totalItems > 0 && (
-                <span className="badge-count animate-bounce-subtle">
-                  {totalItems}
-                </span>
-              )}
-            </Button>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2"
-            >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
+              <Phone className="w-4 h-4 text-primary" />
+              <span>8 800 123-45-67</span>
+            </a>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-border animate-fade-in">
-            <div className="flex flex-col gap-4">
+      {/* Main Navigation Bar */}
+      <div className="bg-background/95 backdrop-blur-md border-b border-border">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Logo */}
+            <a href="#" className="flex items-center gap-2">
+              <span className="text-2xl md:text-3xl font-black text-primary">
+                Eagles
+              </span>
+              <span className="text-2xl md:text-3xl font-black text-foreground">
+                Food
+              </span>
+            </a>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="nav-link text-lg py-2"
+                  className="nav-link text-sm uppercase tracking-wide"
                 >
                   {link.label}
                 </a>
               ))}
+            </nav>
+
+            {/* Cart Button */}
+            <div className="flex items-center gap-4">
+              <Button
+                onClick={openCart}
+                className="rounded-xl bg-primary hover:bg-orange-dark text-primary-foreground font-semibold px-4 py-2 flex items-center gap-2"
+              >
+                <ShoppingCart className="h-5 w-5" />
+                <span className="hidden sm:inline">Корзина</span>
+                {totalItems > 0 && (
+                  <span className="bg-background text-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </Button>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2"
+              >
+                {mobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
             </div>
-          </nav>
-        )}
+          </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <nav className="md:hidden py-4 border-t border-border animate-fade-in">
+              <div className="flex flex-col gap-4">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="nav-link text-lg py-2"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                {/* Mobile time info */}
+                <div className="flex items-center gap-2 text-muted-foreground pt-4 border-t border-border">
+                  <Clock className="w-4 h-4" />
+                  <span className="text-sm">Пн-Пт: 10:00 — 23:00 | Сб-Вс: 11:00 — 00:00</span>
+                </div>
+              </div>
+            </nav>
+          )}
+        </div>
       </div>
     </header>
   );
