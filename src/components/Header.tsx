@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
 
 const navLinks = [
-  { href: '#menu', label: 'Меню' },
-  { href: '#promotions', label: 'Акции' },
-  { href: '#reviews', label: 'Отзывы' },
-  { href: '#contacts', label: 'Контакты' },
+  { href: '#pizza', label: 'Пицца' },
+  { href: '#rolls', label: 'Роллы' },
+  { href: '#burgers', label: 'Бургеры' },
+  { href: '#drinks', label: 'Напитки' },
 ];
 
 export function Header() {
