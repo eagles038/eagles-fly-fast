@@ -82,7 +82,6 @@ export function ProductCard({
     });
     setLocalQuantity(1);
     setJustAdded(true);
-    setTimeout(() => setJustAdded(false), 1500);
   };
 
   const getBadgeContent = () => {
