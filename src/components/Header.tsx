@@ -43,7 +43,9 @@ export function Header() {
                   <span>Сб-Вс: 11:00 — 00:00</span>
                 </div>
               </div>
-              <div className="hidden lg:flex items-center gap-4 ml-2">
+            </div>
+            <div className="flex items-center gap-10">
+              <div className="hidden lg:flex items-center gap-4">
                 <a
                   href="#promotions"
                   onClick={(e) => handleSmoothScroll(e, '#promotions')}
@@ -59,14 +61,14 @@ export function Header() {
                   Отзывы
                 </a>
               </div>
+              <a 
+                href="tel:+78001234567" 
+                className="flex items-center gap-2 font-semibold hover:text-primary transition-colors"
+              >
+                <Phone className="w-4 h-4 text-primary" />
+                <span>8 800 123-45-67</span>
+              </a>
             </div>
-            <a 
-              href="tel:+78001234567" 
-              className="flex items-center gap-2 font-semibold hover:text-primary transition-colors"
-            >
-              <Phone className="w-4 h-4 text-primary" />
-              <span>8 800 123-45-67</span>
-            </a>
           </div>
         </div>
       </div>
