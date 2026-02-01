@@ -90,14 +90,26 @@ const popularItems = [
 
 export function PopularSection() {
   return (
-    <section className="py-12 md:py-16 bg-secondary/30">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-8">
+    <section className="relative py-16 md:py-20 overflow-hidden">
+      {/* Яркий градиентный фон */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-orange-600" />
+      
+      {/* Декоративные элементы */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-yellow-400/20 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl" />
+      <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-white/5 rounded-full blur-2xl" />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex items-center justify-between mb-10">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
+              <span className="text-2xl">🔥</span>
+              <span className="text-white font-semibold text-sm uppercase tracking-wider">Хиты продаж</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-3">
               Популярное
             </h2>
-            <p className="text-muted-foreground text-lg">
+            <p className="text-white/80 text-lg md:text-xl">
               Самые любимые блюда наших гостей
             </p>
           </div>
@@ -116,13 +128,22 @@ export function PopularSection() {
                 key={item.id}
                 className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
-                <ProductCard {...item} index={index} />
+                <div className="transform hover:scale-[1.02] transition-transform duration-300">
+                  <ProductCard {...item} index={index} />
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex -left-4 h-12 w-12 border-2 border-primary/20 bg-background hover:bg-primary hover:text-primary-foreground" />
-          <CarouselNext className="hidden md:flex -right-4 h-12 w-12 border-2 border-primary/20 bg-background hover:bg-primary hover:text-primary-foreground" />
+          <CarouselPrevious className="hidden md:flex -left-4 h-14 w-14 border-0 bg-white text-primary shadow-xl hover:bg-white hover:scale-110 transition-transform" />
+          <CarouselNext className="hidden md:flex -right-4 h-14 w-14 border-0 bg-white text-primary shadow-xl hover:bg-white hover:scale-110 transition-transform" />
         </Carousel>
+
+        {/* Нижний декоративный текст */}
+        <div className="mt-10 text-center">
+          <p className="text-white/60 text-sm">
+            ⭐ Более 10 000 довольных клиентов выбирают эти блюда
+          </p>
+        </div>
       </div>
     </section>
   );
