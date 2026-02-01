@@ -3,7 +3,7 @@ import { Flame, Clock, Percent } from 'lucide-react';
 
 export function PromotionsSection() {
   return (
-    <section id="promotions" className="py-16 md:py-24 bg-cream">
+    <section id="promotions" className="py-16 md:py-24 bg-cream scroll-mt-32 md:scroll-mt-36">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="section-title mb-4">Акции и скидки</h2>
