@@ -25,7 +25,10 @@ import {
   Trash2,
   Sparkles,
   ChevronRight,
-  ArrowLeft
+  ArrowLeft,
+  CreditCard,
+  Banknote,
+  Wallet
 } from 'lucide-react';
 
 import drinkCola from '@/assets/drink-cola.jpg';
@@ -65,6 +68,7 @@ export default function Checkout() {
   const [comment, setComment] = useState('');
   const [deliveryTime, setDeliveryTime] = useState<'asap' | 'scheduled'>('asap');
   const [scheduledTime, setScheduledTime] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState<'cash' | 'card_courier' | 'online'>('cash');
   
   // Promo code
   const [promoCode, setPromoCode] = useState('');
@@ -456,6 +460,49 @@ export default function Checkout() {
                       )}
                     </div>
                   </RadioGroup>
+                </div>
+
+                {/* Payment Method */}
+                <div className="mb-6">
+                  <Label className="mb-3 flex items-center gap-2">
+                    <Wallet className="w-4 h-4 text-muted-foreground" />
+                    Способ оплаты
+                  </Label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button
+                      onClick={() => setPaymentMethod('cash')}
+                      className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all ${
+                        paymentMethod === 'cash'
+                          ? 'border-primary bg-primary/10 text-primary'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      <Banknote className="w-5 h-5" />
+                      <span className="font-medium text-sm">Наличные</span>
+                    </button>
+                    <button
+                      onClick={() => setPaymentMethod('card_courier')}
+                      className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all ${
+                        paymentMethod === 'card_courier'
+                          ? 'border-primary bg-primary/10 text-primary'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      <CreditCard className="w-5 h-5" />
+                      <span className="font-medium text-sm">Картой курьеру</span>
+                    </button>
+                    <button
+                      onClick={() => setPaymentMethod('online')}
+                      className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all ${
+                        paymentMethod === 'online'
+                          ? 'border-primary bg-primary/10 text-primary'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      <Wallet className="w-5 h-5" />
+                      <span className="font-medium text-sm">Онлайн</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Comment */}
