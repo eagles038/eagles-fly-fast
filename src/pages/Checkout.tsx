@@ -58,6 +58,30 @@ const drinks = [
 const FREE_DELIVERY_THRESHOLD = 1500;
 const DELIVERY_COST = 200;
 
+const pickupPoints = [
+  { 
+    id: 'point-1', 
+    name: 'ул. Ленина, 15', 
+    address: 'г. Москва, ул. Ленина, д. 15',
+    workHours: '10:00 - 23:00',
+    metro: 'м. Площадь Революции'
+  },
+  { 
+    id: 'point-2', 
+    name: 'ул. Пушкина, 42', 
+    address: 'г. Москва, ул. Пушкина, д. 42',
+    workHours: '10:00 - 22:00',
+    metro: 'м. Тверская'
+  },
+  { 
+    id: 'point-3', 
+    name: 'пр. Мира, 101', 
+    address: 'г. Москва, пр. Мира, д. 101',
+    workHours: '09:00 - 23:00',
+    metro: 'м. ВДНХ'
+  },
+];
+
 export default function Checkout() {
   const navigate = useNavigate();
   const { items, updateQuantity, removeItem, getTotalPrice, clearCart, addItem } = useCartStore();
@@ -76,6 +100,7 @@ export default function Checkout() {
   const [scheduledDate, setScheduledDate] = useState<Date>();
   const [scheduledTime, setScheduledTime] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'card_courier' | 'online'>('cash');
+  const [selectedPickupPoint, setSelectedPickupPoint] = useState(pickupPoints[0].id);
   
   // Promo code
   const [promoCode, setPromoCode] = useState('');
@@ -439,6 +464,52 @@ export default function Checkout() {
                           className="rounded-xl h-12"
                         />
                       </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Pickup Points (only for pickup) */}
+                {deliveryType === 'pickup' && (
+                  <div className="mb-6">
+                    <Label className="mb-3 flex items-center gap-2">
+                      <Store className="w-4 h-4 text-muted-foreground" />
+                      Пункт самовывоза
+                    </Label>
+                    <div className="space-y-3">
+                      {pickupPoints.map((point) => (
+                        <button
+                          key={point.id}
+                          onClick={() => setSelectedPickupPoint(point.id)}
+                          className={`w-full text-left p-4 rounded-2xl border-2 transition-all ${
+                            selectedPickupPoint === point.id
+                              ? 'border-primary bg-primary/5'
+                              : 'border-border hover:border-primary/50'
+                          }`}
+                        >
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="font-semibold">{point.name}</p>
+                              <p className="text-sm text-muted-foreground mt-1">{point.address}</p>
+                              <div className="flex flex-wrap gap-3 mt-2 text-xs text-muted-foreground">
+                                <span className="flex items-center gap-1">
+                                  <Clock className="w-3 h-3" />
+                                  {point.workHours}
+                                </span>
+                                <span>{point.metro}</span>
+                              </div>
+                            </div>
+                            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ml-3 ${
+                              selectedPickupPoint === point.id
+                                ? 'border-primary bg-primary'
+                                : 'border-muted-foreground/30'
+                            }`}>
+                              {selectedPickupPoint === point.id && (
+                                <Check className="w-3 h-3 text-primary-foreground" />
+                              )}
+                            </div>
+                          </div>
+                        </button>
+                      ))}
                     </div>
                   </div>
                 )}
