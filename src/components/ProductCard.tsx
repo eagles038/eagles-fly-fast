@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useCartStore } from '@/lib/store';
@@ -195,7 +195,7 @@ export function ProductCard({
               onClick={handleAddToCart}
               className="rounded-xl bg-primary hover:bg-orange-dark text-primary-foreground font-semibold px-4 py-2 transition-all hover:scale-105"
             >
-              <Plus className="w-5 h-5" />
+              <ShoppingCart className="w-5 h-5" />
             </Button>
           </div>
         </div>
