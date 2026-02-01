@@ -45,6 +45,7 @@ export function ProductCard({
   const [selectedSize, setSelectedSize] = useState(sizes?.[0]?.size || null);
   const [selectedPieces, setSelectedPieces] = useState(piecesOptions?.[0]?.pieces || null);
   const [localQuantity, setLocalQuantity] = useState(1);
+  const [justAdded, setJustAdded] = useState(false);
 
   const getCurrentPrice = () => {
     if (sizes && selectedSize) {
@@ -80,6 +81,8 @@ export function ProductCard({
       },
     });
     setLocalQuantity(1);
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1500);
   };
 
   const getBadgeContent = () => {
@@ -193,7 +196,12 @@ export function ProductCard({
             
             <Button
               onClick={handleAddToCart}
-              className="rounded-xl bg-primary hover:bg-orange-dark text-primary-foreground font-semibold px-4 py-2 transition-all hover:scale-105"
+              className={cn(
+                "rounded-xl font-semibold px-4 py-2 transition-all hover:scale-105",
+                justAdded 
+                  ? "bg-green-500 hover:bg-green-600 text-white" 
+                  : "bg-primary hover:bg-orange-dark text-primary-foreground"
+              )}
             >
               <ShoppingCart className="w-5 h-5" />
             </Button>
