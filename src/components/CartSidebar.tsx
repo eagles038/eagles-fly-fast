@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Minus, Plus, Trash2, ShoppingBag, Truck, Sparkles, Tag, X, Check } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingBag, Truck, Sparkles, Tag, X, Check, ArrowRight } from 'lucide-react';
 import { useCartStore } from '@/lib/store';
 import { toast } from 'sonner';
 import { Progress } from '@/components/ui/progress';
@@ -21,6 +22,7 @@ const recommendedItems = [
 const FREE_DELIVERY_THRESHOLD = 1500;
 
 export function CartSidebar() {
+  const navigate = useNavigate();
   const { items, isOpen, closeCart, updateQuantity, removeItem, getTotalPrice, clearCart, addItem, openCart } = useCartStore();
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<{ code: string; discount: number } | null>(null);
@@ -58,11 +60,8 @@ export function CartSidebar() {
   };
 
   const handleOrder = () => {
-    toast.success('Спасибо за заказ! Мы свяжемся с вами в ближайшее время.');
-    clearCart();
-    setAppliedPromo(null);
-    setPromoCode('');
     closeCart();
+    navigate('/checkout');
   };
 
   const handleAddRecommended = (item: typeof recommendedItems[0]) => {
