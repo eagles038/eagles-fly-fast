@@ -29,8 +29,11 @@ export function CartSidebar() {
   const [promoError, setPromoError] = useState('');
 
   const totalPrice = getTotalPrice();
+  const totalOldPrice = items.reduce((sum, item) => sum + (item.oldPrice || item.price) * item.quantity, 0);
+  const productDiscount = totalOldPrice - totalPrice;
   const discountAmount = appliedPromo ? Math.round(totalPrice * appliedPromo.discount) : 0;
   const finalPrice = totalPrice - discountAmount;
+  const totalDiscount = productDiscount + discountAmount;
   const remainingForFreeDelivery = Math.max(0, FREE_DELIVERY_THRESHOLD - finalPrice);
   const deliveryProgress = Math.min(100, (finalPrice / FREE_DELIVERY_THRESHOLD) * 100);
 
@@ -275,11 +278,22 @@ export function CartSidebar() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Сумма заказа</span>
-                  <span>{totalPrice} ₽</span>
+                  <div className="flex items-center gap-2">
+                    <span>{totalPrice} ₽</span>
+                    {productDiscount > 0 && (
+                      <span className="text-muted-foreground line-through text-xs">{totalOldPrice} ₽</span>
+                    )}
+                  </div>
                 </div>
+                {productDiscount > 0 && (
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">Скидка на товары</span>
+                    <span className="text-primary font-medium">-{productDiscount} ₽</span>
+                  </div>
+                )}
                 {appliedPromo && (
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Скидка</span>
+                    <span className="text-muted-foreground">Промокод ({appliedPromo.code})</span>
                     <span className="text-primary font-medium">-{discountAmount} ₽</span>
                   </div>
                 )}
