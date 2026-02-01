@@ -8,6 +8,7 @@ import { ReviewsSection } from '@/components/ReviewsSection';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
 import { MobileCartButton } from '@/components/MobileCartButton';
+import { CookieConsent } from '@/components/CookieConsent';
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
       <Footer />
       <CartSidebar />
       <MobileCartButton />
+      <CookieConsent />
     </div>
   );
 };
