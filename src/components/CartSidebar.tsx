@@ -152,9 +152,16 @@ export function CartSidebar() {
                       <div className="flex-1 min-w-0 flex flex-col justify-between">
                         <div>
                           <h4 className="font-semibold text-sm leading-tight line-clamp-2">{item.name}</h4>
-                          <p className="text-lg font-bold text-primary mt-1">
-                            {item.price * item.quantity} ₽
-                          </p>
+                          <div className="flex items-center gap-2 mt-1">
+                            <p className="text-lg font-bold text-primary">
+                              {item.price * item.quantity} ₽
+                            </p>
+                            {item.oldPrice && (
+                              <p className="text-sm text-muted-foreground line-through">
+                                {item.oldPrice * item.quantity} ₽
+                              </p>
+                            )}
+                          </div>
                         </div>
 
                         <div className="flex items-center justify-between mt-2">

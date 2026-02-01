@@ -66,7 +66,8 @@ export function ProductCard({
           : piecesOptions && selectedPieces 
           ? `${name} (${selectedPieces} шт)` 
           : name, 
-        price: currentPrice, 
+        price: currentPrice,
+        oldPrice: oldPrice,
         image,
         size: selectedSize || undefined,
         pieces: selectedPieces || undefined,
