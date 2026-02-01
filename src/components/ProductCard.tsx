@@ -99,7 +99,7 @@ export function ProductCard({
 
   return (
     <div
-      className="food-card group animate-fade-in h-full flex flex-col"
+      className="food-card group animate-fade-in"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       <div className="relative aspect-square overflow-hidden">
@@ -116,56 +116,53 @@ export function ProductCard({
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
 
-      <div className="p-5 flex flex-col flex-1">
+      <div className="p-5">
         <h3 className="text-xl font-bold mb-2">{name}</h3>
         <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
           {description}
         </p>
 
-        {/* Options container with fixed height */}
-        <div className="min-h-[48px] mb-4">
-          {/* Size options for pizza */}
-          {sizes && sizes.length > 0 && (
-            <div className="flex gap-2">
-              {sizes.map((sizeOption) => (
-                <button
-                  key={sizeOption.size}
-                  onClick={() => setSelectedSize(sizeOption.size)}
-                  className={cn(
-                    "flex-1 py-2 px-3 rounded-xl text-sm font-medium transition-all border-2",
-                    selectedSize === sizeOption.size
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-border bg-secondary hover:border-primary/50"
-                  )}
-                >
-                  {sizeOption.size}
-                </button>
-              ))}
-            </div>
-          )}
+        {/* Size options for pizza */}
+        {sizes && sizes.length > 0 && (
+          <div className="flex gap-2 mb-4">
+            {sizes.map((sizeOption) => (
+              <button
+                key={sizeOption.size}
+                onClick={() => setSelectedSize(sizeOption.size)}
+                className={cn(
+                  "flex-1 py-2 px-3 rounded-xl text-sm font-medium transition-all border-2",
+                  selectedSize === sizeOption.size
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-border bg-secondary hover:border-primary/50"
+                )}
+              >
+                {sizeOption.size}
+              </button>
+            ))}
+          </div>
+        )}
 
-          {/* Pieces options for rolls */}
-          {piecesOptions && piecesOptions.length > 0 && (
-            <div className="flex gap-2">
-              {piecesOptions.map((piecesOption) => (
-                <button
-                  key={piecesOption.pieces}
-                  onClick={() => setSelectedPieces(piecesOption.pieces)}
-                  className={cn(
-                    "flex-1 py-2 px-3 rounded-xl text-sm font-medium transition-all border-2",
-                    selectedPieces === piecesOption.pieces
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-border bg-secondary hover:border-primary/50"
-                  )}
-                >
-                  {piecesOption.pieces} шт
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+        {/* Pieces options for rolls */}
+        {piecesOptions && piecesOptions.length > 0 && (
+          <div className="flex gap-2 mb-4">
+            {piecesOptions.map((piecesOption) => (
+              <button
+                key={piecesOption.pieces}
+                onClick={() => setSelectedPieces(piecesOption.pieces)}
+                className={cn(
+                  "flex-1 py-2 px-3 rounded-xl text-sm font-medium transition-all border-2",
+                  selectedPieces === piecesOption.pieces
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-border bg-secondary hover:border-primary/50"
+                )}
+              >
+                {piecesOption.pieces} шт
+              </button>
+            ))}
+          </div>
+        )}
 
-        <div className="flex items-center justify-between mt-auto">
+        <div className="flex items-center justify-between">
           <div className="flex flex-col">
             <span className="text-2xl font-bold text-primary">{currentPrice} ₽</span>
             {oldPrice && (
