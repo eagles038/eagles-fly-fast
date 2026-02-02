@@ -3,12 +3,14 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 import heroImage from '@/assets/hero-food.jpg';
 import pizzaImage from '@/assets/pizza-pepperoni.jpg';
 import burgerImage from '@/assets/burger-classic.jpg';
+import heroVideo from '@/assets/hero-video.mp4';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef, useState, useEffect, useCallback } from 'react';
 
 const slides = [
   {
     image: heroImage,
+    video: heroVideo,
     title: 'Вкуснейшая пицца и сочные бургеры с доставкой за',
     highlight: '30 минут',
     subtitle: 'Готовим из свежих ингредиентов сразу после вашего заказа',
@@ -70,15 +72,29 @@ export function HeroSection() {
           {slides.map((slide, index) => (
             <CarouselItem key={index} className="pl-0">
               <div className="relative min-h-screen flex items-center">
-                {/* Background Image */}
-                <div 
-                  className="absolute inset-0 z-0"
-                  style={{
-                    backgroundImage: `url(${slide.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
-                >
+                {/* Background Video or Image */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                  {slide.video ? (
+                    <video
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-cover"
+                      poster={slide.image}
+                    >
+                      <source src={slide.video} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <div 
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage: `url(${slide.image})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                      }}
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/70 to-foreground/40" />
                 </div>
 
