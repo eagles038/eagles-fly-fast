@@ -9,6 +9,7 @@ import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
 import { MobileCartButton } from '@/components/MobileCartButton';
 import { CookieConsent } from '@/components/CookieConsent';
+import { ExitIntentPopup } from '@/components/ExitIntentPopup';
 
 const Index = () => {
   return (
@@ -26,6 +27,7 @@ const Index = () => {
       <CartSidebar />
       <MobileCartButton />
       <CookieConsent />
+      <ExitIntentPopup />
     </div>
   );
 };
