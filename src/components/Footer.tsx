@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import logo from '@/assets/logo.png';
 
 export function Footer() {
@@ -115,8 +116,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-background/10 pt-8 text-center text-background/50 text-sm">
+        <div className="border-t border-background/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-background/50 text-sm">
           <p>© 2025 Eagles Food. Все права защищены.</p>
+          <Link 
+            to="/privacy" 
+            className="hover:text-primary transition-colors"
+          >
+            Политика конфиденциальности
+          </Link>
         </div>
       </div>
     </footer>
