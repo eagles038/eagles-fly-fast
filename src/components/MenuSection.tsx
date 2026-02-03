@@ -1,6 +1,4 @@
 import { useState, useMemo } from 'react';
-import { Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/ProductCard';
 import { CategoryFilter, pizzaFilters, rollsFilters, burgersFilters, FilterOption } from '@/components/CategoryFilter';
 import pizzaPepperoni from '@/assets/pizza-pepperoni.jpg';
@@ -252,12 +250,7 @@ const menuCategories: MenuCategory[] = [
   },
 ];
 
-interface MenuCategorySectionProps {
-  category: MenuCategory;
-  onOpenPizzaBuilder?: () => void;
-}
-
-function MenuCategorySection({ category, onOpenPizzaBuilder }: MenuCategorySectionProps) {
+function MenuCategorySection({ category }: { category: MenuCategory }) {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
   const handleFilterChange = (filterId: string) => {
@@ -283,35 +276,14 @@ function MenuCategorySection({ category, onOpenPizzaBuilder }: MenuCategorySecti
       className="py-12 md:py-16 even:bg-secondary/30 scroll-mt-32 md:scroll-mt-36"
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-8 md:mb-10">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-              {category.title}
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              {category.description}
-            </p>
-          </div>
-          {category.id === 'pizza' && onOpenPizzaBuilder && (
-            <Button 
-              onClick={onOpenPizzaBuilder}
-              className="rounded-xl font-semibold hidden sm:flex"
-            >
-              <Sparkles className="w-4 h-4 mr-2" />
-              Собрать свою
-            </Button>
-          )}
+        <div className="mb-8 md:mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+            {category.title}
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            {category.description}
+          </p>
         </div>
-
-        {category.id === 'pizza' && onOpenPizzaBuilder && (
-          <Button 
-            onClick={onOpenPizzaBuilder}
-            className="rounded-xl font-semibold mb-6 sm:hidden w-full"
-          >
-            <Sparkles className="w-4 h-4 mr-2" />
-            Собрать свою пиццу
-          </Button>
-        )}
 
         {category.filters && (
           <CategoryFilter
@@ -345,19 +317,11 @@ function MenuCategorySection({ category, onOpenPizzaBuilder }: MenuCategorySecti
   );
 }
 
-interface MenuSectionProps {
-  onOpenPizzaBuilder?: () => void;
-}
-
-export function MenuSection({ onOpenPizzaBuilder }: MenuSectionProps) {
+export function MenuSection() {
   return (
     <div id="menu">
       {menuCategories.map((category) => (
-        <MenuCategorySection 
-          key={category.id} 
-          category={category} 
-          onOpenPizzaBuilder={category.id === 'pizza' ? onOpenPizzaBuilder : undefined}
-        />
+        <MenuCategorySection key={category.id} category={category} />
       ))}
     </div>
   );
