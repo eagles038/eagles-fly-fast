@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Header } from '@/components/Header';
 import { HeroSection } from '@/components/HeroSection';
 import { FeaturesSection } from '@/components/FeaturesSection';
@@ -10,8 +11,11 @@ import { CartSidebar } from '@/components/CartSidebar';
 import { MobileCartButton } from '@/components/MobileCartButton';
 import { CookieConsent } from '@/components/CookieConsent';
 import { ExitIntentPopup } from '@/components/ExitIntentPopup';
+import { PizzaBuilder } from '@/components/PizzaBuilder';
 
 const Index = () => {
+  const [isPizzaBuilderOpen, setIsPizzaBuilderOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -19,7 +23,7 @@ const Index = () => {
         <HeroSection />
         <FeaturesSection />
         <PopularSection />
-        <MenuSection />
+        <MenuSection onOpenPizzaBuilder={() => setIsPizzaBuilderOpen(true)} />
         <PromotionsSection />
         <ReviewsSection />
       </main>
@@ -28,6 +32,7 @@ const Index = () => {
       <MobileCartButton />
       <CookieConsent />
       <ExitIntentPopup />
+      <PizzaBuilder isOpen={isPizzaBuilderOpen} onClose={() => setIsPizzaBuilderOpen(false)} />
     </div>
   );
 };
