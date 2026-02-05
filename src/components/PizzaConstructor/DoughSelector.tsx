@@ -17,7 +17,7 @@ const doughIcons: Record<string, React.ReactNode> = {
 export function DoughSelector({ options, selected, onSelect }: DoughSelectorProps) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-foreground">1. Выберите тесто</h3>
+      <h3 className="text-lg font-bold text-foreground">Шаг 1 — Основа</h3>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {options.map((option) => (
           <button

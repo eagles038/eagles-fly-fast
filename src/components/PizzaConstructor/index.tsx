@@ -99,10 +99,10 @@ export function PizzaConstructor() {
             <span className="font-semibold">Конструктор пиццы</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-            Создай свою идеальную пиццу
+            Собери пиццу мечты
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Выберите тесто, размер и любимые ингредиенты — мы приготовим пиццу специально для вас!
+            Три простых шага — и твоя уникальная пицца готова к заказу!
           </p>
         </div>
 

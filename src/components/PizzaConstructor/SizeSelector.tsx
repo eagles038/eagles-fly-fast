@@ -10,7 +10,7 @@ interface SizeSelectorProps {
 export function SizeSelector({ options, selected, onSelect }: SizeSelectorProps) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-foreground">2. Выберите размер</h3>
+      <h3 className="text-lg font-bold text-foreground">Шаг 2 — Размер</h3>
       <div className="flex gap-3 justify-center">
         {options.map((option, index) => {
           const sizes = [60, 80, 100]; // visual sizes for icons
