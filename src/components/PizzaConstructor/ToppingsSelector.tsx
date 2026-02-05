@@ -31,7 +31,7 @@ export function ToppingsSelector({ options, selected, onToggle }: ToppingsSelect
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-bold text-foreground">Шаг 3 — Начинка</h3>
+      <h3 className="text-lg font-bold text-foreground">3. Добавьте начинку</h3>
 
       {/* Category tabs */}
       <div className="flex gap-2 overflow-x-auto pb-2">
