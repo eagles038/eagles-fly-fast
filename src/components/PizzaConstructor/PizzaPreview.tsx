@@ -20,7 +20,7 @@ export function PizzaPreview({ state }: PizzaPreviewProps) {
   return (
     <div className="bg-card rounded-2xl p-6 shadow-food sticky top-24">
       <h3 className="text-lg font-bold text-foreground mb-4 text-center">
-        Ваша пицца
+        Твоя пицца
       </h3>
 
       {/* Pizza visual */}

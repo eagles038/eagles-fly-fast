@@ -29,20 +29,20 @@ export interface ConstructorState {
 export const doughOptions: DoughOption[] = [
   {
     id: 'thin',
-    name: 'Тонкое',
-    description: 'Хрустящее тесто для любителей классики',
+    name: 'Хрустящее',
+    description: 'Тонкое и хрустящее как чипс',
     priceModifier: 0,
   },
   {
     id: 'thick',
-    name: 'Пышное',
-    description: 'Воздушное тесто с мягким краем',
+    name: 'Пушистое',
+    description: 'Мягкое и воздушное тесто',
     priceModifier: 50,
   },
   {
     id: 'cheese-crust',
-    name: 'Сырный борт',
-    description: 'С расплавленным сыром в бортике',
+    name: 'С сыром в бортике',
+    description: 'Моцарелла прячется в краешке',
     priceModifier: 100,
   },
 ];
@@ -50,19 +50,19 @@ export const doughOptions: DoughOption[] = [
 export const sizeOptions: SizeOption[] = [
   {
     id: 'small',
-    name: 'Маленькая',
+    name: 'Мини',
     diameter: 25,
     priceModifier: 0,
   },
   {
     id: 'medium',
-    name: 'Средняя',
+    name: 'Стандарт',
     diameter: 30,
     priceModifier: 150,
   },
   {
     id: 'large',
-    name: 'Большая',
+    name: 'Семейная',
     diameter: 40,
     priceModifier: 350,
   },
@@ -70,29 +70,29 @@ export const sizeOptions: SizeOption[] = [
 
 export const toppingOptions: ToppingOption[] = [
   // Мясо
-  { id: 'pepperoni', name: 'Пепперони', price: 79, category: 'meat', icon: '🥓' },
-  { id: 'chicken', name: 'Курица', price: 89, category: 'meat', icon: '🍗' },
-  { id: 'bacon', name: 'Бекон', price: 99, category: 'meat', icon: '🥓' },
-  { id: 'ham', name: 'Ветчина', price: 79, category: 'meat', icon: '🍖' },
+  { id: 'pepperoni', name: 'Пепперони', price: 79, category: 'meat', icon: '🍕' },
+  { id: 'chicken', name: 'Курочка', price: 89, category: 'meat', icon: '🍗' },
+  { id: 'bacon', name: 'Хрустящий бекон', price: 99, category: 'meat', icon: '🥓' },
+  { id: 'ham', name: 'Нежная ветчина', price: 79, category: 'meat', icon: '🍖' },
   
   // Овощи
-  { id: 'tomato', name: 'Томаты', price: 49, category: 'vegetables', icon: '🍅' },
-  { id: 'mushrooms', name: 'Шампиньоны', price: 59, category: 'vegetables', icon: '🍄' },
-  { id: 'pepper', name: 'Болгарский перец', price: 49, category: 'vegetables', icon: '🫑' },
-  { id: 'onion', name: 'Лук', price: 29, category: 'vegetables', icon: '🧅' },
-  { id: 'olives', name: 'Маслины', price: 69, category: 'vegetables', icon: '🫒' },
-  { id: 'jalapeno', name: 'Халапеньо', price: 59, category: 'vegetables', icon: '🌶️' },
+  { id: 'tomato', name: 'Свежие томаты', price: 49, category: 'vegetables', icon: '🍅' },
+  { id: 'mushrooms', name: 'Грибочки', price: 59, category: 'vegetables', icon: '🍄' },
+  { id: 'pepper', name: 'Сладкий перец', price: 49, category: 'vegetables', icon: '🫑' },
+  { id: 'onion', name: 'Красный лук', price: 29, category: 'vegetables', icon: '🧅' },
+  { id: 'olives', name: 'Оливки', price: 69, category: 'vegetables', icon: '🫒' },
+  { id: 'jalapeno', name: 'Острый халапеньо', price: 59, category: 'vegetables', icon: '🌶️' },
   
   // Сыры
-  { id: 'mozzarella', name: 'Моцарелла', price: 89, category: 'cheese', icon: '🧀' },
+  { id: 'mozzarella', name: 'Тягучая моцарелла', price: 89, category: 'cheese', icon: '🧀' },
   { id: 'parmesan', name: 'Пармезан', price: 99, category: 'cheese', icon: '🧀' },
   { id: 'cheddar', name: 'Чеддер', price: 79, category: 'cheese', icon: '🧀' },
-  { id: 'feta', name: 'Фета', price: 89, category: 'cheese', icon: '🧀' },
+  { id: 'feta', name: 'Солёная фета', price: 89, category: 'cheese', icon: '🧀' },
   
   // Соусы
-  { id: 'tomato-sauce', name: 'Томатный', price: 0, category: 'sauce', icon: '🍅' },
-  { id: 'cream-sauce', name: 'Сливочный', price: 30, category: 'sauce', icon: '🥛' },
-  { id: 'bbq-sauce', name: 'BBQ', price: 30, category: 'sauce', icon: '🍯' },
+  { id: 'tomato-sauce', name: 'Классический томатный', price: 0, category: 'sauce', icon: '🍅' },
+  { id: 'cream-sauce', name: 'Нежный сливочный', price: 30, category: 'sauce', icon: '🥛' },
+  { id: 'bbq-sauce', name: 'Дымный BBQ', price: 30, category: 'sauce', icon: '🍯' },
 ];
 
 export const BASE_PRICE = 299;
