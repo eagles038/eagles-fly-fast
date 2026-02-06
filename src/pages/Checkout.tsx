@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { CheckoutSEO } from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -185,6 +186,7 @@ export default function Checkout() {
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-background">
+        <CheckoutSEO />
         <Header />
         <main className="pt-32 pb-20">
           <div className="container mx-auto px-4">
@@ -209,6 +211,7 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-secondary/30">
+      <CheckoutSEO />
       <Header />
       
       <main className="pt-32 pb-20">

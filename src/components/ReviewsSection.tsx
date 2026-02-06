@@ -29,22 +29,25 @@ const reviews = [
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="py-16 md:py-24 scroll-mt-32 md:scroll-mt-36">
+    <section id="reviews" aria-labelledby="reviews-heading" className="py-16 md:py-24 scroll-mt-32 md:scroll-mt-36">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="section-title mb-4">Отзывы клиентов</h2>
+        <header className="text-center mb-12">
+          <h2 id="reviews-heading" className="section-title mb-4">Отзывы клиентов</h2>
           <p className="text-muted-foreground text-lg">
             Что говорят о нас наши любимые клиенты
           </p>
-        </div>
+        </header>
 
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {reviews.map((review, index) => (
-            <div
+            <article
               key={review.id}
               className="bg-card rounded-2xl p-6 shadow-food animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
+              itemScope
+              itemType="https://schema.org/Review"
             >
+              <meta itemProp="author" content={review.name} />
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
                   {review.avatar}
@@ -55,17 +58,21 @@ export function ReviewsSection() {
                 </div>
               </div>
 
-              <div className="flex gap-1 mb-3">
+              <div className="flex gap-1 mb-3" itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                <meta itemProp="ratingValue" content={String(review.rating)} />
+                <meta itemProp="bestRating" content="5" />
                 {[...Array(review.rating)].map((_, i) => (
                   <Star
                     key={i}
                     className="w-5 h-5 fill-primary text-primary"
+                    aria-hidden="true"
                   />
                 ))}
+                <span className="sr-only">Оценка: {review.rating} из 5</span>
               </div>
 
-              <p className="text-muted-foreground">{review.text}</p>
-            </div>
+              <p className="text-muted-foreground" itemProp="reviewBody">{review.text}</p>
+            </article>
           ))}
         </div>
       </div>
