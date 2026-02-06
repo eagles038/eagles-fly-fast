@@ -273,17 +273,18 @@ function MenuCategorySection({ category }: { category: MenuCategory }) {
   return (
     <section
       id={category.id}
+      aria-labelledby={`${category.id}-heading`}
       className="py-12 md:py-16 even:bg-secondary/30 scroll-mt-32 md:scroll-mt-36"
     >
       <div className="container mx-auto px-4">
-        <div className="mb-8 md:mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+        <header className="mb-8 md:mb-10">
+          <h2 id={`${category.id}-heading`} className="text-3xl md:text-4xl font-bold text-foreground mb-2">
             {category.title}
           </h2>
           <p className="text-muted-foreground text-lg">
             {category.description}
           </p>
-        </div>
+        </header>
 
         {category.filters && (
           <CategoryFilter
@@ -319,7 +320,7 @@ function MenuCategorySection({ category }: { category: MenuCategory }) {
 
 export function MenuSection() {
   return (
-    <div id="menu">
+    <div id="menu" role="region" aria-label="Меню">
       {menuCategories.map((category) => (
         <MenuCategorySection key={category.id} category={category} />
       ))}

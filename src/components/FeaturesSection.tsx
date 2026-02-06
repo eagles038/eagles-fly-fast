@@ -20,7 +20,8 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-16 md:py-24 bg-cream">
+    <section aria-labelledby="features-heading" className="py-16 md:py-24 bg-cream">
+      <h2 id="features-heading" className="sr-only">Наши преимущества</h2>
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {features.map((feature, index) => (

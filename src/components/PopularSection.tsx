@@ -90,7 +90,7 @@ const popularItems = [
 
 export function PopularSection() {
   return (
-    <section className="relative py-16 md:py-20 overflow-hidden">
+    <section aria-labelledby="popular-heading" className="relative py-16 md:py-20 overflow-hidden">
       {/* Яркий градиентный фон */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-orange-600" />
       
@@ -106,7 +106,7 @@ export function PopularSection() {
               <span className="text-2xl">🔥</span>
               <span className="text-white font-semibold text-sm uppercase tracking-wider">Хиты продаж</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-3">
+            <h2 id="popular-heading" className="text-3xl md:text-5xl font-black text-white mb-3">
               Популярное
             </h2>
             <p className="text-white/80 text-lg md:text-xl">

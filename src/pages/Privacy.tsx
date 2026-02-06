@@ -1,9 +1,11 @@
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { PrivacySEO } from '@/components/SEO';
 
 const Privacy = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PrivacySEO />
       <Header />
       <main className="pt-24 pb-16">
         <div className="container mx-auto px-4">

@@ -1,6 +1,7 @@
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
+import { DeliverySEO } from '@/components/SEO';
 import { Truck, Clock, MapPin, CreditCard, Gift, CheckCircle } from 'lucide-react';
 
 const deliveryZones = [
@@ -64,6 +65,7 @@ const benefits = [
 export default function Delivery() {
   return (
     <div className="min-h-screen bg-background">
+      <DeliverySEO />
       <Header />
       <CartSidebar />
       

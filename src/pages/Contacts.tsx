@@ -1,6 +1,7 @@
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CartSidebar } from '@/components/CartSidebar';
+import { ContactsSEO } from '@/components/SEO';
 import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react';
 
 const contactMethods = [
@@ -42,6 +43,7 @@ const workingHours = [
 export default function Contacts() {
   return (
     <div className="min-h-screen bg-background">
+      <ContactsSEO />
       <Header />
       <CartSidebar />
       

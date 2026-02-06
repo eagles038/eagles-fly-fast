@@ -58,7 +58,7 @@ export function HeroSection() {
   }, [api]);
 
   return (
-    <section className="relative min-h-screen pt-20">
+    <section aria-label="Главный баннер" className="relative min-h-screen pt-20">
       <Carousel
         setApi={setApi}
         opts={{

@@ -11,10 +11,12 @@ import { CartSidebar } from '@/components/CartSidebar';
 import { MobileCartButton } from '@/components/MobileCartButton';
 import { CookieConsent } from '@/components/CookieConsent';
 import { ExitIntentPopup } from '@/components/ExitIntentPopup';
+import { HomeSEO } from '@/components/SEO';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <HomeSEO />
       <Header />
       <main>
         <HeroSection />
