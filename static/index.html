@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Eagles Food — вкуснейшая пицца и сочные бургеры с доставкой за 30 минут. Более 10 000 довольных клиентов!">
+  <meta name="author" content="Eagles Food">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Eagles Food — Доставка пиццы и бургеров">
+  <meta property="og:description" content="Вкуснейшая пицца и сочные бургеры с доставкой за 30 минут">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  
+  <title>Eagles Food — Доставка пиццы и бургеров за 30 минут</title>
+  
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page">
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <!-- Top Bar -->
+    <div class="header__top-bar">
+      <div class="container header__top-container">
+        <div class="header__contacts">
+          <div class="header__contact-item">
+            <svg class="header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="header__contact-text header__contact-text--desktop">г. Москва, ул. Ленина 25</span>
+            <span class="header__contact-text header__contact-text--mobile">Москва</span>
+          </div>
+          <div class="header__contact-item header__contact-item--desktop">
+            <svg class="header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12,6 12,12 16,14"></polyline>
+            </svg>
+            <div class="header__schedule">
+              <span>Пн-Пт: 10:00 — 23:00</span>
+              <span>Сб-Вс: 11:00 — 00:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="header__actions">
+          <nav class="header__top-nav header__top-nav--desktop">
+            <a href="#promotions" class="header__top-link">Акции</a>
+            <a href="#reviews" class="header__top-link">Отзывы</a>
+            <a href="delivery.html" class="header__top-link">Доставка</a>
+            <a href="contacts.html" class="header__top-link">Контакты</a>
+          </nav>
+          <a href="tel:+78001234567" class="header__phone">
+            <svg class="header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span class="header__phone-text header__phone-text--desktop">8 800 123-45-67</span>
+            <span class="header__phone-text header__phone-text--mobile">Звонок</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <div class="header__main">
+      <div class="container header__main-container">
+        <a href="/" class="header__logo">
+          <img src="logo.png" alt="Eagles Food" class="header__logo-img">
+        </a>
+
+        <nav class="header__nav header__nav--desktop">
+          <a href="#pizza" class="header__nav-link" data-scroll>Пицца</a>
+          <a href="#rolls" class="header__nav-link" data-scroll>Роллы</a>
+          <a href="#burgers" class="header__nav-link" data-scroll>Бургеры</a>
+          <a href="#drinks" class="header__nav-link" data-scroll>Напитки</a>
+        </nav>
+
+        <div class="header__right">
+          <button class="header__cart-btn" id="cartBtn">
+            <svg class="header__cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="header__cart-text">Корзина</span>
+            <span class="header__cart-count header__cart-count--hidden" id="cartCount">0</span>
+          </button>
+
+          <button class="header__burger" id="menuToggle" aria-label="Открыть меню">
+            <span class="header__burger-line"></span>
+            <span class="header__burger-line"></span>
+            <span class="header__burger-line"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <nav class="header__mobile-menu" id="mobileMenu">
+        <div class="container">
+          <div class="header__mobile-section">
+            <span class="header__mobile-label">Меню</span>
+            <a href="#pizza" class="header__mobile-link" data-scroll>Пицца</a>
+            <a href="#rolls" class="header__mobile-link" data-scroll>Роллы</a>
+            <a href="#burgers" class="header__mobile-link" data-scroll>Бургеры</a>
+            <a href="#drinks" class="header__mobile-link" data-scroll>Напитки</a>
+          </div>
+          <div class="header__mobile-section">
+            <a href="#promotions" class="header__mobile-link" data-scroll>Акции</a>
+            <a href="#reviews" class="header__mobile-link" data-scroll>Отзывы</a>
+            <a href="delivery.html" class="header__mobile-link">Доставка</a>
+            <a href="contacts.html" class="header__mobile-link">Контакты</a>
+          </div>
+          <div class="header__mobile-contacts">
+            <div class="header__mobile-contact">
+              <svg class="header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>г. Москва, ул. Ленина 25</span>
+            </div>
+            <a href="tel:+78001234567" class="header__mobile-contact header__mobile-contact--phone">
+              <svg class="header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span>8 800 123-45-67</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" aria-label="Главный баннер">
+      <div class="hero__slide hero__slide--active" data-slide="0">
+        <video class="hero__video" autoplay loop muted playsinline poster="hero-food.jpg">
+          <source src="hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero__overlay"></div>
+        <div class="container hero__content">
+          <h1 class="hero__title">
+            Вкуснейшая пицца и сочные бургеры с доставкой за
+            <span class="hero__title-highlight">30 минут</span>
+          </h1>
+          <p class="hero__subtitle">Готовим из свежих ингредиентов сразу после вашего заказа</p>
+          <div class="hero__buttons">
+            <a href="#menu" class="button button--primary button--large" data-scroll>Выбрать еду</a>
+            <a href="#promotions" class="button button--outline button--large" data-scroll>Смотреть акции</a>
+          </div>
+          <div class="hero__stats">
+            <div class="hero__stat">
+              <span class="hero__stat-value">10 000+</span>
+              <span class="hero__stat-label">Довольных клиентов</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-value">30 мин</span>
+              <span class="hero__stat-label">Среднее время доставки</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-value">4.9 ★</span>
+              <span class="hero__stat-label">Рейтинг на Яндекс</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero__dots">
+        <button class="hero__dot hero__dot--active" data-slide="0" aria-label="Слайд 1"></button>
+        <button class="hero__dot" data-slide="1" aria-label="Слайд 2"></button>
+        <button class="hero__dot" data-slide="2" aria-label="Слайд 3"></button>
+      </div>
+      <button class="hero__arrow hero__arrow--prev" aria-label="Предыдущий слайд">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15,18 9,12 15,6"></polyline>
+        </svg>
+      </button>
+      <button class="hero__arrow hero__arrow--next" aria-label="Следующий слайд">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9,18 15,12 9,6"></polyline>
+        </svg>
+      </button>
+    </section>
+
+    <!-- ==================== FEATURES SECTION ==================== -->
+    <section class="features" aria-labelledby="features-heading">
+      <h2 id="features-heading" class="visually-hidden">Наши преимущества</h2>
+      <div class="container">
+        <div class="features__grid">
+          <article class="feature-card">
+            <div class="feature-card__icon-wrap">
+              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16,8 20,8 23,11 23,16 16,16 16,8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <h3 class="feature-card__title">Быстрая доставка</h3>
+            <p class="feature-card__text">Доставим ваш заказ в течение 30 минут или вернём деньги</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-card__icon-wrap">
+              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M9 12l2 2 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="feature-card__title">Свежие продукты</h3>
+            <p class="feature-card__text">Используем только качественные ингредиенты от проверенных поставщиков</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-card__icon-wrap">
+              <svg class="feature-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20,12 20,22 4,22 4,12"></polyline>
+                <rect x="2" y="7" width="20" height="5"></rect>
+                <line x1="12" y1="22" x2="12" y2="7"></line>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+              </svg>
+            </div>
+            <h3 class="feature-card__title">Подарки именинникам</h3>
+            <p class="feature-card__text">Бесплатная пицца в день рождения при заказе от 1500₽</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== POPULAR SECTION ==================== -->
+    <section class="popular" aria-labelledby="popular-heading">
+      <div class="popular__decor popular__decor--top"></div>
+      <div class="popular__decor popular__decor--bottom"></div>
+      <div class="container">
+        <div class="popular__header">
+          <div class="popular__badge">
+            <span class="popular__badge-emoji">🔥</span>
+            <span class="popular__badge-text">Хиты продаж</span>
+          </div>
+          <h2 id="popular-heading" class="popular__title">Популярное</h2>
+          <p class="popular__subtitle">Самые любимые блюда наших гостей</p>
+        </div>
+        
+        <div class="popular__carousel" id="popularCarousel">
+          <div class="popular__track" id="popularTrack">
+            <!-- Popular items will be generated by JS -->
+          </div>
+          <button class="popular__arrow popular__arrow--prev" id="popularPrev" aria-label="Назад">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+          </button>
+          <button class="popular__arrow popular__arrow--next" id="popularNext" aria-label="Вперёд">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </button>
+        </div>
+        
+        <p class="popular__note">⭐ Более 10 000 довольных клиентов выбирают эти блюда</p>
+      </div>
+    </section>
+
+    <!-- ==================== PIZZA CONSTRUCTOR ==================== -->
+    <section class="constructor" id="constructor">
+      <div class="container">
+        <div class="constructor__header">
+          <div class="constructor__badge">
+            <svg class="constructor__badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"></path>
+              <line x1="6" y1="17" x2="18" y2="17"></line>
+            </svg>
+            <span>Конструктор пиццы</span>
+          </div>
+          <h2 class="constructor__title">Создай свою идеальную пиццу</h2>
+          <p class="constructor__subtitle">Выберите тесто, размер и любимые ингредиенты — мы приготовим пиццу специально для вас!</p>
+        </div>
+
+        <div class="constructor__layout">
+          <div class="constructor__options">
+            <!-- Dough Selector -->
+            <div class="constructor__card">
+              <h3 class="constructor__section-title">1. Выберите тесто</h3>
+              <div class="constructor__dough-grid" id="doughOptions">
+                <!-- Generated by JS -->
+              </div>
+            </div>
+
+            <!-- Size Selector -->
+            <div class="constructor__card">
+              <h3 class="constructor__section-title">2. Выберите размер</h3>
+              <div class="constructor__size-grid" id="sizeOptions">
+                <!-- Generated by JS -->
+              </div>
+            </div>
+
+            <!-- Toppings Selector -->
+            <div class="constructor__card">
+              <h3 class="constructor__section-title">3. Добавьте начинку</h3>
+              <div class="constructor__tabs" id="toppingTabs">
+                <button class="constructor__tab constructor__tab--active" data-category="sauce">Соус</button>
+                <button class="constructor__tab" data-category="meat">Мясо</button>
+                <button class="constructor__tab" data-category="vegetables">Овощи</button>
+                <button class="constructor__tab" data-category="cheese">Сыры</button>
+              </div>
+              <div class="constructor__toppings-grid" id="toppingsGrid">
+                <!-- Generated by JS -->
+              </div>
+              <div class="constructor__selected-toppings" id="selectedToppings">
+                <!-- Generated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div class="constructor__preview-wrap">
+            <div class="constructor__preview" id="pizzaPreview">
+              <h3 class="constructor__preview-title">Ваша пицца</h3>
+              <div class="constructor__pizza-visual" id="pizzaVisual">
+                <div class="constructor__pizza-base" id="pizzaBase">
+                  <div class="constructor__pizza-sauce" id="pizzaSauce"></div>
+                  <div class="constructor__pizza-cheese" id="pizzaCheese"></div>
+                  <div class="constructor__pizza-toppings" id="pizzaToppings"></div>
+                </div>
+                <div class="constructor__pizza-size" id="pizzaSizeLabel">30 см</div>
+              </div>
+              <div class="constructor__summary" id="pizzaSummary">
+                <!-- Generated by JS -->
+              </div>
+            </div>
+            <div class="constructor__actions">
+              <button class="button button--primary button--large constructor__add-btn" id="addPizzaToCart">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="button__icon">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                Добавить в корзину
+              </button>
+              <button class="button button--outline constructor__reset-btn" id="resetPizza">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="button__icon">
+                  <polyline points="1,4 1,10 7,10"></polyline>
+                  <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                </svg>
+                Сбросить
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MENU SECTION ==================== -->
+    <div id="menu" role="region" aria-label="Меню">
+      <!-- Pizza Category -->
+      <section class="menu-category" id="pizza" aria-labelledby="pizza-heading">
+        <div class="container">
+          <header class="menu-category__header">
+            <h2 id="pizza-heading" class="menu-category__title">Пицца</h2>
+            <p class="menu-category__description">Ароматная пицца на тонком тесте с натуральными ингредиентами</p>
+          </header>
+          <div class="menu-category__filters" id="pizzaFilters">
+            <!-- Generated by JS -->
+          </div>
+          <div class="menu-category__grid" id="pizzaGrid">
+            <!-- Generated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Rolls Category -->
+      <section class="menu-category menu-category--alt" id="rolls" aria-labelledby="rolls-heading">
+        <div class="container">
+          <header class="menu-category__header">
+            <h2 id="rolls-heading" class="menu-category__title">Роллы</h2>
+            <p class="menu-category__description">Свежие роллы с отборными морепродуктами и рыбой</p>
+          </header>
+          <div class="menu-category__grid" id="rollsGrid">
+            <!-- Generated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Burgers Category -->
+      <section class="menu-category" id="burgers" aria-labelledby="burgers-heading">
+        <div class="container">
+          <header class="menu-category__header">
+            <h2 id="burgers-heading" class="menu-category__title">Бургеры</h2>
+            <p class="menu-category__description">Сочные бургеры с фирменными соусами и свежими овощами</p>
+          </header>
+          <div class="menu-category__grid" id="burgersGrid">
+            <!-- Generated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Drinks Category -->
+      <section class="menu-category menu-category--alt" id="drinks" aria-labelledby="drinks-heading">
+        <div class="container">
+          <header class="menu-category__header">
+            <h2 id="drinks-heading" class="menu-category__title">Напитки</h2>
+            <p class="menu-category__description">Освежающие напитки и коктейли к вашему заказу</p>
+          </header>
+          <div class="menu-category__grid" id="drinksGrid">
+            <!-- Generated by JS -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== PROMOTIONS SECTION ==================== -->
+    <section class="promotions" id="promotions">
+      <div class="container">
+        <div class="promotions__header">
+          <h2 class="promotions__title">Акции и скидки</h2>
+          <p class="promotions__subtitle">Специальные предложения для наших клиентов</p>
+        </div>
+
+        <div class="promotions__main-banner">
+          <div class="promotions__banner-decor">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 23a7.5 7.5 0 0 0 7.5-7.5c0-4.14-7.5-15.5-7.5-15.5S4.5 11.36 4.5 15.5A7.5 7.5 0 0 0 12 23z"></path>
+            </svg>
+          </div>
+          <div class="promotions__banner-content">
+            <div class="promotions__banner-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="promotions__banner-icon">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12,6 12,12 16,14"></polyline>
+              </svg>
+              <span>Только по будням</span>
+            </div>
+            <h3 class="promotions__banner-title">2+1 на все пепперони</h3>
+            <p class="promotions__banner-text">Закажите две пиццы пепперони и получите третью бесплатно!</p>
+            <a href="#menu" class="button button--white" data-scroll>Заказать со скидкой</a>
+          </div>
+        </div>
+
+        <div class="promotions__cards">
+          <article class="promo-card">
+            <div class="promo-card__icon-wrap">
+              <svg class="promo-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="5" x2="5" y2="19"></line>
+                <circle cx="6.5" cy="6.5" r="2.5"></circle>
+                <circle cx="17.5" cy="17.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <div class="promo-card__content">
+              <h4 class="promo-card__title">Скидка 15% на первый заказ</h4>
+              <p class="promo-card__text">Используйте промокод FIRST15 при оформлении заказа</p>
+            </div>
+          </article>
+
+          <article class="promo-card">
+            <div class="promo-card__icon-wrap">
+              <svg class="promo-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 23a7.5 7.5 0 0 0 7.5-7.5c0-4.14-7.5-15.5-7.5-15.5S4.5 11.36 4.5 15.5A7.5 7.5 0 0 0 12 23z"></path>
+              </svg>
+            </div>
+            <div class="promo-card__content">
+              <h4 class="promo-card__title">Комбо дня</h4>
+              <p class="promo-card__text">Пицца + бургер + напиток = 899₽ вместо 1097₽</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== REVIEWS SECTION ==================== -->
+    <section class="reviews" id="reviews" aria-labelledby="reviews-heading">
+      <div class="container">
+        <header class="reviews__header">
+          <h2 id="reviews-heading" class="reviews__title">Отзывы клиентов</h2>
+          <p class="reviews__subtitle">Что говорят о нас наши любимые клиенты</p>
+        </header>
+
+        <div class="reviews__grid">
+          <article class="review-card" itemscope itemtype="https://schema.org/Review">
+            <meta itemprop="author" content="Александр К.">
+            <div class="review-card__header">
+              <div class="review-card__avatar">А</div>
+              <div class="review-card__info">
+                <h4 class="review-card__name">Александр К.</h4>
+                <p class="review-card__date">2 дня назад</p>
+              </div>
+            </div>
+            <div class="review-card__rating" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+              <meta itemprop="ratingValue" content="5">
+              <meta itemprop="bestRating" content="5">
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+            </div>
+            <p class="review-card__text" itemprop="reviewBody">Лучшая пицца в городе! Доставили за 25 минут, ещё горячая. Пепперони просто бомба! 🔥</p>
+          </article>
+
+          <article class="review-card" itemscope itemtype="https://schema.org/Review">
+            <meta itemprop="author" content="Мария С.">
+            <div class="review-card__header">
+              <div class="review-card__avatar">М</div>
+              <div class="review-card__info">
+                <h4 class="review-card__name">Мария С.</h4>
+                <p class="review-card__date">1 неделю назад</p>
+              </div>
+            </div>
+            <div class="review-card__rating" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+              <meta itemprop="ratingValue" content="5">
+              <meta itemprop="bestRating" content="5">
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+            </div>
+            <p class="review-card__text" itemprop="reviewBody">Заказывали на день рождения ребёнка. Подарили бесплатную пиццу! Дети в восторге, обязательно закажем ещё.</p>
+          </article>
+
+          <article class="review-card" itemscope itemtype="https://schema.org/Review">
+            <meta itemprop="author" content="Дмитрий В.">
+            <div class="review-card__header">
+              <div class="review-card__avatar">Д</div>
+              <div class="review-card__info">
+                <h4 class="review-card__name">Дмитрий В.</h4>
+                <p class="review-card__date">2 недели назад</p>
+              </div>
+            </div>
+            <div class="review-card__rating" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+              <meta itemprop="ratingValue" content="5">
+              <meta itemprop="bestRating" content="5">
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+              <span class="review-card__star">★</span>
+            </div>
+            <p class="review-card__text" itemprop="reviewBody">Острый бургер - это что-то невероятное. Идеальный баланс вкуса и остроты. Рекомендую!</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" id="contacts">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="logo.png" alt="Eagles Food" class="footer__logo">
+          <p class="footer__tagline">Вкуснейшая пицца и сочные бургеры с доставкой за 30 минут</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social" aria-label="Telegram">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.16l-1.61 7.59c-.12.54-.44.67-.89.42l-2.46-1.81-1.19 1.14c-.13.13-.24.24-.5.24l.18-2.5 4.56-4.12c.2-.18-.04-.28-.31-.1l-5.64 3.55-2.43-.76c-.53-.17-.54-.53.11-.78l9.51-3.67c.44-.16.82.11.68.78z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social" aria-label="VK">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.587-1.496c.596-.19 1.362 1.26 2.174 1.82.614.422 1.08.33 1.08.33l2.172-.03s1.136-.07.598-.964c-.044-.073-.314-.66-1.618-1.866-1.366-1.263-1.183-1.058.462-3.242.998-1.328 1.398-2.14 1.273-2.487-.119-.333-.855-.245-.855-.245l-2.448.015s-.181-.025-.316.056c-.131.08-.216.267-.216.267s-.387 1.03-.903 1.906c-1.088 1.848-1.524 1.946-1.702 1.832-.414-.265-.31-1.066-.31-1.634 0-1.777.27-2.518-.525-2.71-.264-.063-.458-.105-1.133-.112-.866-.01-1.6.003-2.014.206-.276.135-.49.436-.36.453.16.022.523.098.715.36.248.338.239 1.097.239 1.097s.143 2.093-.332 2.353c-.327.18-.774-.186-1.735-1.858-.492-.856-.863-1.803-.863-1.803s-.072-.176-.2-.271c-.155-.115-.372-.151-.372-.151l-2.324.015s-.349.01-.477.161c-.114.135-.01.414-.01.414s1.825 4.267 3.892 6.416c1.895 1.97 4.044 1.841 4.044 1.841h.975z"/>
+              </svg>
+            </a>
+            <a href="#" class="footer__social" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__section">
+          <h4 class="footer__heading">Контакты</h4>
+          <ul class="footer__list">
+            <li class="footer__item">
+              <svg class="footer__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <a href="tel:+78001234567" class="footer__link">8 (800) 123-45-67</a>
+            </li>
+            <li class="footer__item">
+              <svg class="footer__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <a href="mailto:info@eaglesfood.ru" class="footer__link">info@eaglesfood.ru</a>
+            </li>
+            <li class="footer__item">
+              <svg class="footer__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>г. Москва, ул. Примерная, д. 123</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__section">
+          <h4 class="footer__heading">Время работы</h4>
+          <ul class="footer__list">
+            <li class="footer__item">
+              <svg class="footer__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12,6 12,12 16,14"></polyline>
+              </svg>
+              <span>Пн-Чт: 10:00 - 23:00</span>
+            </li>
+            <li class="footer__item">
+              <svg class="footer__item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12,6 12,12 16,14"></polyline>
+              </svg>
+              <span>Пт-Вс: 10:00 - 01:00</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__section">
+          <h4 class="footer__heading">Меню</h4>
+          <ul class="footer__list">
+            <li><a href="#pizza" class="footer__link" data-scroll>Пицца</a></li>
+            <li><a href="#rolls" class="footer__link" data-scroll>Роллы</a></li>
+            <li><a href="#burgers" class="footer__link" data-scroll>Бургеры</a></li>
+            <li><a href="#promotions" class="footer__link" data-scroll>Акции</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2025 Eagles Food. Все права защищены.</p>
+        <a href="privacy.html" class="footer__privacy-link">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== CART SIDEBAR ==================== -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart" id="cartSidebar">
+    <div class="cart__header">
+      <div class="cart__title-wrap">
+        <div class="cart__icon-wrap">
+          <svg class="cart__title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
+        <div>
+          <h2 class="cart__title">Ваш заказ</h2>
+          <p class="cart__items-count" id="cartItemsCount">0 позиций</p>
+        </div>
+      </div>
+      <button class="cart__close" id="cartClose" aria-label="Закрыть корзину">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cart__delivery-progress" id="deliveryProgress">
+      <div class="cart__delivery-info">
+        <svg class="cart__delivery-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16,8 20,8 23,11 23,16 16,16 16,8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        <span id="deliveryText">До бесплатной доставки: <strong>1500 ₽</strong></span>
+      </div>
+      <div class="cart__progress-bar">
+        <div class="cart__progress-fill" id="deliveryProgressFill" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <div class="cart__body" id="cartBody">
+      <div class="cart__empty" id="cartEmpty">
+        <div class="cart__empty-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
+        <h3 class="cart__empty-title">Корзина пуста</h3>
+        <p class="cart__empty-text">Выберите что-нибудь вкусное из нашего меню</p>
+        <button class="button button--primary" id="cartEmptyBtn">Смотреть меню</button>
+      </div>
+      <div class="cart__items" id="cartItems">
+        <!-- Generated by JS -->
+      </div>
+    </div>
+
+    <div class="cart__footer" id="cartFooter">
+      <div class="cart__promo">
+        <div class="cart__promo-input-wrap">
+          <svg class="cart__promo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <input type="text" class="cart__promo-input" id="promoInput" placeholder="Промокод">
+        </div>
+        <button class="button button--outline cart__promo-btn" id="promoBtn">Применить</button>
+      </div>
+      <div class="cart__promo-applied cart__promo-applied--hidden" id="promoApplied">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20,6 9,17 4,12"></polyline>
+        </svg>
+        <span id="promoCode"></span>
+        <span id="promoDiscount"></span>
+        <button class="cart__promo-remove" id="promoRemove">×</button>
+      </div>
+      <p class="cart__promo-error cart__promo-error--hidden" id="promoError">Промокод не найден</p>
+
+      <div class="cart__totals">
+        <div class="cart__total-row">
+          <span>Сумма заказа</span>
+          <span id="cartSubtotal">0 ₽</span>
+        </div>
+        <div class="cart__total-row cart__total-row--discount cart__total-row--hidden" id="discountRow">
+          <span>Скидка</span>
+          <span id="cartDiscount">-0 ₽</span>
+        </div>
+        <div class="cart__total-row">
+          <span>Доставка</span>
+          <span id="deliveryPrice">200 ₽</span>
+        </div>
+        <div class="cart__total-row cart__total-row--final">
+          <span>Итого</span>
+          <span class="cart__final-price" id="cartTotal">0 ₽</span>
+        </div>
+      </div>
+
+      <button class="button button--primary button--large cart__checkout-btn" id="checkoutBtn">
+        Оформить заказ
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== MOBILE CART BUTTON ==================== -->
+  <button class="mobile-cart mobile-cart--hidden" id="mobileCart">
+    <div class="mobile-cart__info">
+      <svg class="mobile-cart__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span id="mobileCartCount">0</span>
+    </div>
+    <span class="mobile-cart__total" id="mobileCartTotal">0 ₽</span>
+  </button>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div class="toast toast--hidden" id="toast">
+    <p class="toast__message" id="toastMessage"></p>
+    <button class="toast__action" id="toastAction">Открыть корзину</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
