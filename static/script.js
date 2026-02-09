@@ -844,6 +844,378 @@
   }
 
   /* ========================================
+     CHECKOUT PAGE
+  ======================================== */
+  function initCheckout() {
+    const checkoutEmpty = document.getElementById('checkoutEmpty');
+    const checkoutContent = document.getElementById('checkoutContent');
+    const checkoutItems = document.getElementById('checkoutItems');
+    const checkoutItemsCount = document.getElementById('checkoutItemsCount');
+    const deliveryFields = document.getElementById('deliveryFields');
+    const pickupFields = document.getElementById('pickupFields');
+    const deliveryToggleBtns = document.querySelectorAll('.checkout-form__toggle-btn');
+    const summarySubtotal = document.getElementById('summarySubtotal');
+    const summaryDiscount = document.getElementById('summaryDiscount');
+    const summaryDelivery = document.getElementById('summaryDelivery');
+    const summaryTotal = document.getElementById('summaryTotal');
+    const discountRow = document.getElementById('discountRow');
+    const deliveryRow = document.getElementById('deliveryRow');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const progressAmount = document.getElementById('progressAmount');
+    const promoInput = document.getElementById('promoCode');
+    const applyPromoBtn = document.getElementById('applyPromo');
+    const promoApplied = document.getElementById('promoApplied');
+    const promoAppliedText = document.getElementById('promoAppliedText');
+    const removePromoBtn = document.getElementById('removePromo');
+    const promoError = document.getElementById('promoError');
+    const submitOrderBtn = document.getElementById('submitOrder');
+    const sauceButtons = document.querySelectorAll('.checkout-sauce');
+    const drinkButtons = document.querySelectorAll('.checkout-drink');
+
+    if (!checkoutEmpty) return; // Not on checkout page
+
+    let deliveryType = 'delivery';
+
+    function updateCheckoutUI() {
+      const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      
+      if (cart.length === 0) {
+        checkoutEmpty.classList.remove('checkout__empty--hidden');
+        checkoutContent.classList.remove('checkout__content--visible');
+        return;
+      }
+
+      checkoutEmpty.classList.add('checkout__empty--hidden');
+      checkoutContent.classList.add('checkout__content--visible');
+
+      // Render items
+      checkoutItems.innerHTML = cart.map(item => `
+        <div class="checkout-item" data-item-key="${item.key}">
+          <img src="${item.image}" alt="${item.name}" class="checkout-item__image" loading="lazy">
+          <div class="checkout-item__info">
+            <h4 class="checkout-item__name">${item.name}</h4>
+            ${item.size ? `<p class="checkout-item__size">${item.size}</p>` : ''}
+            ${item.pieces ? `<p class="checkout-item__size">${item.pieces} шт</p>` : ''}
+            <p class="checkout-item__price">${formatPrice(item.price * item.quantity)}</p>
+          </div>
+          <div class="checkout-item__actions">
+            <button class="checkout-item__remove" data-remove-item>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3,6 5,6 21,6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+            <div class="checkout-item__quantity">
+              <button class="checkout-item__qty-btn" data-qty-action="decrease">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              </button>
+              <span class="checkout-item__qty-value">${item.quantity}</span>
+              <button class="checkout-item__qty-btn" data-qty-action="increase">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      checkoutItemsCount.textContent = itemCount + ' ' + getItemWord(itemCount);
+
+      // Calculate totals
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const discount = appliedPromo ? Math.round(subtotal * appliedPromo.discount) : 0;
+      const subtotalAfterDiscount = subtotal - discount;
+      const deliveryCost = deliveryType === 'delivery' && subtotalAfterDiscount < FREE_DELIVERY_THRESHOLD ? DELIVERY_PRICE : 0;
+      const total = subtotalAfterDiscount + deliveryCost;
+      const remainingForFree = Math.max(0, FREE_DELIVERY_THRESHOLD - subtotalAfterDiscount);
+      const progress = Math.min(100, (subtotalAfterDiscount / FREE_DELIVERY_THRESHOLD) * 100);
+
+      summarySubtotal.textContent = formatPrice(subtotal);
+      
+      if (appliedPromo) {
+        discountRow.style.display = 'flex';
+        summaryDiscount.textContent = '-' + formatPrice(discount);
+      } else {
+        discountRow.style.display = 'none';
+      }
+
+      if (deliveryType === 'delivery') {
+        deliveryRow.style.display = 'flex';
+        summaryDelivery.textContent = deliveryCost === 0 ? 'Бесплатно' : formatPrice(deliveryCost);
+        
+        if (remainingForFree > 0) {
+          progressText.innerHTML = `До бесплатной доставки ещё <span>${formatPrice(remainingForFree)}</span>`;
+        } else {
+          progressText.textContent = 'Бесплатная доставка!';
+        }
+        progressFill.style.width = progress + '%';
+      } else {
+        deliveryRow.style.display = 'none';
+        progressText.textContent = 'Самовывоз — доставка не нужна';
+        progressFill.style.width = '100%';
+      }
+
+      summaryTotal.textContent = formatPrice(total);
+    }
+
+    function getItemWord(count) {
+      const mod10 = count % 10;
+      const mod100 = count % 100;
+      if (mod100 >= 11 && mod100 <= 19) return 'товаров';
+      if (mod10 === 1) return 'товар';
+      if (mod10 >= 2 && mod10 <= 4) return 'товара';
+      return 'товаров';
+    }
+
+    // Event handlers
+    checkoutItems.addEventListener('click', function(e) {
+      const item = e.target.closest('.checkout-item');
+      if (!item) return;
+      const key = item.dataset.itemKey;
+
+      const removeBtn = e.target.closest('[data-remove-item]');
+      if (removeBtn) {
+        cart = cart.filter(c => c.key !== key);
+        saveCart();
+        updateCart();
+        updateCheckoutUI();
+        return;
+      }
+
+      const qtyBtn = e.target.closest('[data-qty-action]');
+      if (qtyBtn) {
+        const action = qtyBtn.dataset.qtyAction;
+        const cartItem = cart.find(c => c.key === key);
+        if (cartItem) {
+          if (action === 'increase') {
+            cartItem.quantity++;
+          } else if (action === 'decrease') {
+            cartItem.quantity--;
+            if (cartItem.quantity <= 0) {
+              cart = cart.filter(c => c.key !== key);
+            }
+          }
+          saveCart();
+          updateCart();
+          updateCheckoutUI();
+        }
+      }
+    });
+
+    // Delivery type toggle
+    deliveryToggleBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        deliveryToggleBtns.forEach(b => b.classList.remove('checkout-form__toggle-btn--active'));
+        this.classList.add('checkout-form__toggle-btn--active');
+        deliveryType = this.dataset.type;
+        
+        if (deliveryType === 'delivery') {
+          deliveryFields.style.display = 'block';
+          pickupFields.style.display = 'none';
+        } else {
+          deliveryFields.style.display = 'none';
+          pickupFields.style.display = 'block';
+        }
+        updateCheckoutUI();
+      });
+    });
+
+    // Promo code
+    applyPromoBtn.addEventListener('click', function() {
+      const code = promoInput.value.toUpperCase().trim();
+      if (PROMO_CODES[code]) {
+        appliedPromo = { code: code, discount: PROMO_CODES[code] };
+        promoInput.style.display = 'none';
+        applyPromoBtn.style.display = 'none';
+        promoApplied.style.display = 'flex';
+        promoAppliedText.textContent = code;
+        promoError.textContent = '';
+        updateCheckoutUI();
+        showToast('Промокод применён!');
+      } else {
+        promoError.textContent = 'Промокод не найден';
+      }
+    });
+
+    removePromoBtn.addEventListener('click', function() {
+      appliedPromo = null;
+      promoInput.style.display = 'block';
+      applyPromoBtn.style.display = 'block';
+      promoApplied.style.display = 'none';
+      promoInput.value = '';
+      updateCheckoutUI();
+    });
+
+    // Sauces & Drinks
+    sauceButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        addToCart({
+          id: this.dataset.id,
+          name: this.dataset.name,
+          price: parseInt(this.dataset.price),
+          image: 'pizza-pepperoni.jpg'
+        });
+        updateCheckoutUI();
+      });
+    });
+
+    drinkButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const img = this.querySelector('img');
+        addToCart({
+          id: this.dataset.id,
+          name: this.dataset.name,
+          price: parseInt(this.dataset.price),
+          image: img ? img.src : 'drink-cola.jpg'
+        });
+        updateCheckoutUI();
+      });
+    });
+
+    // Submit order
+    submitOrderBtn.addEventListener('click', function() {
+      const name = document.getElementById('customerName').value.trim();
+      const phone = document.getElementById('customerPhone').value.trim();
+      
+      if (!name || !phone) {
+        showToast('Заполните имя и телефон');
+        return;
+      }
+
+      if (deliveryType === 'delivery') {
+        const street = document.getElementById('street').value.trim();
+        const house = document.getElementById('house').value.trim();
+        if (!street || !house) {
+          showToast('Заполните адрес доставки');
+          return;
+        }
+      }
+
+      showToast('Заказ успешно оформлен!');
+      cart = [];
+      appliedPromo = null;
+      saveCart();
+      updateCart();
+      
+      setTimeout(function() {
+        window.location.href = 'index.html';
+      }, 2000);
+    });
+
+    // Initial update
+    updateCheckoutUI();
+  }
+
+  /* ========================================
+     CART SIDEBAR (for inner pages)
+  ======================================== */
+  function initCartSidebar() {
+    const cartSidebar = document.getElementById('cartSidebar');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const cartClose = document.getElementById('cartClose');
+    const cartContent = document.getElementById('cartContent');
+    const cartFooter = document.getElementById('cartFooter');
+    const cartTotal = document.getElementById('cartTotal');
+
+    if (!cartSidebar) return;
+
+    function openCartSidebar() {
+      cartSidebar.classList.add('cart-sidebar--open');
+      cartOverlay.classList.add('cart-overlay--visible');
+      document.body.style.overflow = 'hidden';
+      renderCartSidebar();
+    }
+
+    function closeCartSidebar() {
+      cartSidebar.classList.remove('cart-sidebar--open');
+      cartOverlay.classList.remove('cart-overlay--visible');
+      document.body.style.overflow = '';
+    }
+
+    function renderCartSidebar() {
+      if (cart.length === 0) {
+        cartContent.innerHTML = `
+          <div class="cart-sidebar__empty">
+            <p>Корзина пуста</p>
+          </div>
+        `;
+        cartFooter.style.display = 'none';
+        return;
+      }
+
+      cartContent.innerHTML = cart.map(item => `
+        <div class="cart__item" data-item-key="${item.key}">
+          <img src="${item.image}" alt="${item.name}" class="cart__item-image" loading="lazy">
+          <div class="cart__item-info">
+            <span class="cart__item-name">${item.name}</span>
+            <span class="cart__item-price">${formatPrice(item.price * item.quantity)}</span>
+            <div class="cart__item-footer">
+              <div class="cart__item-quantity">
+                <button class="cart__item-qty-btn" data-qty-action="decrease">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+                <span class="cart__item-qty-value">${item.quantity}</span>
+                <button class="cart__item-qty-btn" data-qty-action="increase">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </button>
+              </div>
+              <button class="cart__item-remove" data-remove-item>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3,6 5,6 21,6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      cartTotal.textContent = formatPrice(total);
+      cartFooter.style.display = 'block';
+    }
+
+    // Event listeners
+    document.getElementById('cartBtn').addEventListener('click', openCartSidebar);
+    cartClose.addEventListener('click', closeCartSidebar);
+    cartOverlay.addEventListener('click', closeCartSidebar);
+
+    cartContent.addEventListener('click', function(e) {
+      const item = e.target.closest('.cart__item');
+      if (!item) return;
+      const key = item.dataset.itemKey;
+
+      const removeBtn = e.target.closest('[data-remove-item]');
+      if (removeBtn) {
+        cart = cart.filter(c => c.key !== key);
+        saveCart();
+        updateCart();
+        renderCartSidebar();
+        return;
+      }
+
+      const qtyBtn = e.target.closest('[data-qty-action]');
+      if (qtyBtn) {
+        const action = qtyBtn.dataset.qtyAction;
+        const cartItem = cart.find(c => c.key === key);
+        if (cartItem) {
+          if (action === 'increase') {
+            cartItem.quantity++;
+          } else if (action === 'decrease') {
+            cartItem.quantity--;
+            if (cartItem.quantity <= 0) {
+              cart = cart.filter(c => c.key !== key);
+            }
+          }
+          saveCart();
+          updateCart();
+          renderCartSidebar();
+        }
+      }
+    });
+  }
+
+  /* ========================================
      INITIALIZATION
   ======================================== */
   function init() {
@@ -853,6 +1225,8 @@
     initPopular();
     initMenu();
     initConstructor();
+    initCheckout();
+    initCartSidebar();
   }
 
   // Run on DOM ready
