@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Доставка еды от Eagles Food — зоны доставки, стоимость, способы оплаты и время работы. Быстрая доставка по Москве за 30-60 минут.">
+  <meta name="author" content="Eagles Food">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Доставка — Eagles Food">
+  <meta property="og:description" content="Зоны доставки, стоимость и способы оплаты. Быстрая доставка по Москве.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  
+  <title>Доставка — Eagles Food</title>
+  
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page page--inner">
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <!-- Top Bar -->
+    <div class="header__top-bar">
+      <div class="container header__top-container">
+        <div class="header__contacts">
+          <div class="header__contact-item">
+            <svg class="header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="header__contact-text header__contact-text--desktop">г. Москва, ул. Ленина 25</span>
+            <span class="header__contact-text header__contact-text--mobile">Москва</span>
+          </div>
+          <div class="header__contact-item header__contact-item--desktop">
+            <svg class="header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12,6 12,12 16,14"></polyline>
+            </svg>
+            <div class="header__schedule">
+              <span>Пн-Пт: 10:00 — 23:00</span>
+              <span>Сб-Вс: 11:00 — 00:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="header__actions">
+          <nav class="header__top-nav header__top-nav--desktop">
+            <a href="index.html#promotions" class="header__top-link">Акции</a>
+            <a href="index.html#reviews" class="header__top-link">Отзывы</a>
+            <a href="delivery.html" class="header__top-link header__top-link--active">Доставка</a>
+            <a href="contacts.html" class="header__top-link">Контакты</a>
+          </nav>
+          <a href="tel:+78001234567" class="header__phone">
+            <svg class="header__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span class="header__phone-text header__phone-text--desktop">8 800 123-45-67</span>
+            <span class="header__phone-text header__phone-text--mobile">Звонок</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <div class="header__main">
+      <div class="container header__main-container">
+        <a href="index.html" class="header__logo">
+          <img src="logo.png" alt="Eagles Food" class="header__logo-img">
+        </a>
+
+        <nav class="header__nav header__nav--desktop">
+          <a href="index.html#pizza" class="header__nav-link">Пицца</a>
+          <a href="index.html#rolls" class="header__nav-link">Роллы</a>
+          <a href="index.html#burgers" class="header__nav-link">Бургеры</a>
+          <a href="index.html#drinks" class="header__nav-link">Напитки</a>
+        </nav>
+
+        <div class="header__right">
+          <button class="header__cart-btn" id="cartBtn">
+            <svg class="header__cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="header__cart-text">Корзина</span>
+            <span class="header__cart-count header__cart-count--hidden" id="cartCount">0</span>
+          </button>
+
+          <button class="header__burger" id="menuToggle" aria-label="Открыть меню">
+            <span class="header__burger-line"></span>
+            <span class="header__burger-line"></span>
+            <span class="header__burger-line"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <nav class="header__mobile-menu" id="mobileMenu">
+        <div class="container">
+          <div class="header__mobile-section">
+            <span class="header__mobile-label">Меню</span>
+            <a href="index.html#pizza" class="header__mobile-link">Пицца</a>
+            <a href="index.html#rolls" class="header__mobile-link">Роллы</a>
+            <a href="index.html#burgers" class="header__mobile-link">Бургеры</a>
+            <a href="index.html#drinks" class="header__mobile-link">Напитки</a>
+          </div>
+          <div class="header__mobile-section">
+            <a href="index.html#promotions" class="header__mobile-link">Акции</a>
+            <a href="index.html#reviews" class="header__mobile-link">Отзывы</a>
+            <a href="delivery.html" class="header__mobile-link header__mobile-link--active">Доставка</a>
+            <a href="contacts.html" class="header__mobile-link">Контакты</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main main--inner">
+    <!-- ==================== PAGE HEADER ==================== -->
+    <section class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">Доставка</h1>
+        <p class="page-header__subtitle">Доставляем вкусную еду по всей Москве — быстро, аккуратно и с заботой</p>
+      </div>
+    </section>
+
+    <!-- ==================== BENEFITS SECTION ==================== -->
+    <section class="delivery-benefits">
+      <div class="container">
+        <div class="delivery-benefits__grid">
+          <article class="benefit-card">
+            <div class="benefit-card__icon-wrap">
+              <svg class="benefit-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12,6 12,12 16,14"></polyline>
+              </svg>
+            </div>
+            <h3 class="benefit-card__title">Быстрая доставка</h3>
+            <p class="benefit-card__text">Среднее время доставки — 45 минут</p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-card__icon-wrap">
+              <svg class="benefit-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16,8 20,8 23,11 23,16 16,16 16,8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <h3 class="benefit-card__title">Термосумки</h3>
+            <p class="benefit-card__text">Еда приедет горячей благодаря специальным сумкам</p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-card__icon-wrap">
+              <svg class="benefit-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20,12 20,22 4,22 4,12"></polyline>
+                <rect x="2" y="7" width="20" height="5"></rect>
+                <line x1="12" y1="22" x2="12" y2="7"></line>
+                <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+              </svg>
+            </div>
+            <h3 class="benefit-card__title">Бонусы</h3>
+            <p class="benefit-card__text">Накапливайте баллы с каждого заказа</p>
+          </article>
+
+          <article class="benefit-card">
+            <div class="benefit-card__icon-wrap">
+              <svg class="benefit-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M9 12l2 2 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="benefit-card__title">Гарантия качества</h3>
+            <p class="benefit-card__text">Вернём деньги, если что-то не так</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== DELIVERY INFO SECTION ==================== -->
+    <section class="delivery-info">
+      <div class="container">
+        <div class="delivery-info__grid">
+          <!-- Zones Column -->
+          <div class="delivery-info__column">
+            <h2 class="delivery-info__heading">
+              <svg class="delivery-info__heading-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Зоны доставки
+            </h2>
+
+            <div class="delivery-zones">
+              <div class="delivery-zone">
+                <div class="delivery-zone__header">
+                  <span class="delivery-zone__indicator delivery-zone__indicator--green"></span>
+                  <h3 class="delivery-zone__name">Зона 1</h3>
+                  <span class="delivery-zone__radius">(до 3 км)</span>
+                </div>
+                <div class="delivery-zone__details">
+                  <div class="delivery-zone__detail">
+                    <span class="delivery-zone__label">Время</span>
+                    <span class="delivery-zone__value">30-45 мин</span>
+                  </div>
+                  <div class="delivery-zone__detail">
+                    <span class="delivery-zone__label">Стоимость</span>
+                    <span class="delivery-zone__value delivery-zone__value--primary">Бесплатно</span>
+                  </div>
+                  <div class="delivery-zone__detail">
+                    <span class="delivery-zone__label">Мин. заказ</span>
+                    <span class="delivery-zone__value">от 500₽</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="delivery-zone">
+                <div class="delivery-zone__header">
+                  <span class="delivery-zone__indicator delivery-zone__indicator--yellow"></span>
+                  <h3 class="delivery-zone__name">Зона 2</h3>
+                  <span class="delivery-zone__radius">(3-7 км)</span>
+                </div>
+                <div class="delivery-zone__details">
+                  <div class="delivery-zone__detail">
+                    <span class="delivery-zone__label">Время</span>
+                    <span class="delivery-zone__value">45-60 мин</span>
+                  </div>
+                  <div class="delivery-zone__detail">
+                    <span class="delivery-zone__label">Стоимость</span>
+                    <span class="delivery-zone__value delivery-zone__value--primary">150₽</span>
+                  </div>
+                  <div class="delivery-zone__detail">
+                    <span class="delivery-zone__label">Мин. заказ</span>
+                    <span class="delivery-zone__value">от 800₽</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="delivery-zone">
+                <div class="delivery-zone__header">
+                  <span class="delivery-zone__indicator delivery-zone__indicator--orange"></span>
+                  <h3 class="delivery-zone__name">Зона 3</h3>
+                  <span class="delivery-zone__radius">(7-15 км)</span>
+                </div>
+                <div class="delivery-zone__details">
+                  <div class="delivery-zone__detail">
+                    <span class="delivery-zone__label">Время</span>
+                    <span class="delivery-zone__value">60-90 мин</span>
+                  </div>
+                  <div class="delivery-zone__detail">
+                    <span class="delivery-zone__label">Стоимость</span>
+                    <span class="delivery-zone__value delivery-zone__value--primary">300₽</span>
+                  </div>
+                  <div class="delivery-zone__detail">
+                    <span class="delivery-zone__label">Мин. заказ</span>
+                    <span class="delivery-zone__value">от 1500₽</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Column -->
+          <div class="delivery-info__column">
+            <h2 class="delivery-info__heading">
+              <svg class="delivery-info__heading-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+              Способы оплаты
+            </h2>
+
+            <div class="payment-methods">
+              <ul class="payment-methods__list">
+                <li class="payment-methods__item">
+                  <svg class="payment-methods__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20,6 9,17 4,12"></polyline>
+                  </svg>
+                  <span>Наличными курьеру</span>
+                </li>
+                <li class="payment-methods__item">
+                  <svg class="payment-methods__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20,6 9,17 4,12"></polyline>
+                  </svg>
+                  <span>Банковской картой курьеру</span>
+                </li>
+                <li class="payment-methods__item">
+                  <svg class="payment-methods__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20,6 9,17 4,12"></polyline>
+                  </svg>
+                  <span>Онлайн-оплата на сайте</span>
+                </li>
+                <li class="payment-methods__item">
+                  <svg class="payment-methods__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20,6 9,17 4,12"></polyline>
+                  </svg>
+                  <span>Apple Pay / Google Pay</span>
+                </li>
+                <li class="payment-methods__item">
+                  <svg class="payment-methods__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20,6 9,17 4,12"></polyline>
+                  </svg>
+                  <span>СБП (Система быстрых платежей)</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Working Hours Card -->
+            <div class="working-hours">
+              <h3 class="working-hours__title">
+                <svg class="working-hours__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12,6 12,12 16,14"></polyline>
+                </svg>
+                Время работы доставки
+              </h3>
+              <div class="working-hours__list">
+                <div class="working-hours__item">
+                  <span class="working-hours__days">Понедельник — Пятница</span>
+                  <span class="working-hours__time">10:00 — 23:00</span>
+                </div>
+                <div class="working-hours__item">
+                  <span class="working-hours__days">Суббота — Воскресенье</span>
+                  <span class="working-hours__time">11:00 — 00:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Important Info -->
+        <div class="delivery-notice">
+          <h3 class="delivery-notice__title">Важная информация</h3>
+          <ul class="delivery-notice__list">
+            <li class="delivery-notice__item">• Минимальная сумма заказа зависит от зоны доставки</li>
+            <li class="delivery-notice__item">• При заказе от 2000₽ доставка бесплатная в любую зону</li>
+            <li class="delivery-notice__item">• Время доставки может увеличиться в часы пик и плохую погоду</li>
+            <li class="delivery-notice__item">• Курьер свяжется с вами за 5-10 минут до приезда</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">
+            <img src="logo.png" alt="Eagles Food" class="footer__logo-img">
+          </a>
+          <p class="footer__tagline">Вкуснейшая пицца и сочные бургеры с доставкой за 30 минут</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social" aria-label="Telegram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.504-1.36 8.629-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </a>
+            <a href="#" class="footer__social" aria-label="VK">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.525-2.049-1.727-1.033-1.01-1.49-1.148-1.744-1.148-.358 0-.463.102-.463.593v1.575c0 .424-.136.678-1.252.678-1.846 0-3.896-1.118-5.336-3.202C4.624 10.857 4.03 8.57 4.03 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.372 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.049.17.474-.085.716-.576.716z"/></svg>
+            </a>
+            <a href="#" class="footer__social" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+          </div>
+        </div>
+        
+        <div class="footer__column">
+          <h4 class="footer__heading">Меню</h4>
+          <nav class="footer__nav">
+            <a href="index.html#pizza" class="footer__link">Пицца</a>
+            <a href="index.html#rolls" class="footer__link">Роллы</a>
+            <a href="index.html#burgers" class="footer__link">Бургеры</a>
+            <a href="index.html#drinks" class="footer__link">Напитки</a>
+          </nav>
+        </div>
+        
+        <div class="footer__column">
+          <h4 class="footer__heading">Информация</h4>
+          <nav class="footer__nav">
+            <a href="delivery.html" class="footer__link">Доставка</a>
+            <a href="contacts.html" class="footer__link">Контакты</a>
+            <a href="privacy.html" class="footer__link">Политика конфиденциальности</a>
+          </nav>
+        </div>
+        
+        <div class="footer__column">
+          <h4 class="footer__heading">Контакты</h4>
+          <div class="footer__contacts">
+            <a href="tel:+78001234567" class="footer__contact">8 800 123-45-67</a>
+            <a href="mailto:info@eaglesfood.ru" class="footer__contact">info@eaglesfood.ru</a>
+            <span class="footer__contact">г. Москва, ул. Ленина 25</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2024 Eagles Food. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Sidebar -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-sidebar__header">
+      <h2 class="cart-sidebar__title">Корзина</h2>
+      <button class="cart-sidebar__close" id="cartClose" aria-label="Закрыть корзину">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="cart-sidebar__content" id="cartContent">
+      <!-- Cart items will be generated by JS -->
+    </div>
+    <div class="cart-sidebar__footer" id="cartFooter">
+      <div class="cart-sidebar__total">
+        <span>Итого:</span>
+        <span id="cartTotal">0 ₽</span>
+      </div>
+      <a href="checkout.html" class="button button--primary button--large cart-sidebar__checkout">
+        Оформить заказ
+      </a>
+    </div>
+  </aside>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
