@@ -62,28 +62,47 @@
 
   const menuCategories = {
     pizza: [
-      { id: 'pizza-1', name: 'Пепперони', description: 'Пикантная пепперони, моцарелла, томатный соус, орегано', price: 499, image: 'pizza-pepperoni.jpg', badge: 'hit', sizes: [{ size: '25 см', price: 499 }, { size: '30 см', price: 699 }, { size: '40 см', price: 999 }] },
-      { id: 'pizza-2', name: 'Маргарита', description: 'Свежие томаты, моцарелла, базилик, оливковое масло', price: 399, image: 'pizza-margherita.jpg', sizes: [{ size: '25 см', price: 399 }, { size: '30 см', price: 549 }, { size: '40 см', price: 799 }] },
-      { id: 'pizza-3', name: 'BBQ Курица', description: 'Курица гриль, соус BBQ, кукуруза, красный лук, сыр', price: 549, image: 'pizza-bbq.jpg', badge: 'new', sizes: [{ size: '25 см', price: 549 }, { size: '30 см', price: 749 }, { size: '40 см', price: 1099 }] },
-      { id: 'pizza-4', name: '4 сыра', description: 'Моцарелла, пармезан, горгонзола, чеддер на сливочной основе', price: 599, image: 'pizza-4cheese.jpg', sizes: [{ size: '25 см', price: 599 }, { size: '30 см', price: 799 }, { size: '40 см', price: 1149 }] }
+      { id: 'pizza-1', name: 'Пепперони', description: 'Пикантная пепперони, моцарелла, томатный соус, орегано', price: 499, image: 'pizza-pepperoni.jpg', badge: 'hit', filterTags: ['spicy', 'with-meat'], sizes: [{ size: '25 см', price: 499 }, { size: '30 см', price: 699 }, { size: '40 см', price: 999 }] },
+      { id: 'pizza-2', name: 'Маргарита', description: 'Свежие томаты, моцарелла, базилик, оливковое масло', price: 399, image: 'pizza-margherita.jpg', filterTags: ['vegetarian', 'cheese'], sizes: [{ size: '25 см', price: 399 }, { size: '30 см', price: 549 }, { size: '40 см', price: 799 }] },
+      { id: 'pizza-3', name: 'BBQ Курица', description: 'Курица гриль, соус BBQ, кукуруза, красный лук, сыр', price: 549, image: 'pizza-bbq.jpg', badge: 'new', filterTags: ['with-chicken'], sizes: [{ size: '25 см', price: 549 }, { size: '30 см', price: 749 }, { size: '40 см', price: 1099 }] },
+      { id: 'pizza-4', name: '4 сыра', description: 'Моцарелла, пармезан, горгонзола, чеддер на сливочной основе', price: 599, image: 'pizza-4cheese.jpg', filterTags: ['vegetarian', 'cheese'], sizes: [{ size: '25 см', price: 599 }, { size: '30 см', price: 799 }, { size: '40 см', price: 1149 }] }
     ],
     rolls: [
-      { id: 'roll-1', name: 'Филадельфия', description: 'Лосось, сливочный сыр, огурец, рис, нори', price: 349, image: 'roll-philadelphia.jpg', badge: 'hit', piecesOptions: [{ pieces: 6, price: 349 }, { pieces: 8, price: 449 }, { pieces: 12, price: 649 }] },
-      { id: 'roll-2', name: 'Калифорния', description: 'Краб, авокадо, огурец, тобико, кунжут', price: 299, image: 'roll-california.jpg', piecesOptions: [{ pieces: 6, price: 299 }, { pieces: 8, price: 389 }, { pieces: 12, price: 549 }] },
-      { id: 'roll-3', name: 'Дракон', description: 'Угорь, авокадо, огурец, унаги соус, кунжут', price: 449, image: 'roll-dragon.jpg', badge: 'new', oldPrice: 549, piecesOptions: [{ pieces: 6, price: 449 }, { pieces: 8, price: 579 }, { pieces: 12, price: 849 }] },
-      { id: 'roll-4', name: 'Унаги', description: 'Копчёный угорь, сливочный сыр, авокадо, соус унаги', price: 479, image: 'roll-unagi.jpg', badge: 'sale', oldPrice: 579, piecesOptions: [{ pieces: 6, price: 479 }, { pieces: 8, price: 619 }, { pieces: 12, price: 899 }] }
+      { id: 'roll-1', name: 'Филадельфия', description: 'Лосось, сливочный сыр, огурец, рис, нори', price: 349, image: 'roll-philadelphia.jpg', badge: 'hit', filterTags: ['hot', 'with-salmon', 'premium'], piecesOptions: [{ pieces: 6, price: 349 }, { pieces: 8, price: 449 }, { pieces: 12, price: 649 }] },
+      { id: 'roll-2', name: 'Калифорния', description: 'Краб, авокадо, огурец, тобико, кунжут', price: 299, image: 'roll-california.jpg', filterTags: ['baked'], piecesOptions: [{ pieces: 6, price: 299 }, { pieces: 8, price: 389 }, { pieces: 12, price: 549 }] },
+      { id: 'roll-3', name: 'Дракон', description: 'Угорь, авокадо, огурец, унаги соус, кунжут', price: 449, image: 'roll-dragon.jpg', badge: 'new', oldPrice: 549, filterTags: ['sale', 'with-eel', 'premium'], piecesOptions: [{ pieces: 6, price: 449 }, { pieces: 8, price: 579 }, { pieces: 12, price: 849 }] },
+      { id: 'roll-4', name: 'Унаги', description: 'Копчёный угорь, сливочный сыр, авокадо, соус унаги', price: 479, image: 'roll-unagi.jpg', badge: 'sale', oldPrice: 579, filterTags: ['sale', 'with-eel', 'baked'], piecesOptions: [{ pieces: 6, price: 479 }, { pieces: 8, price: 619 }, { pieces: 12, price: 899 }] }
     ],
     burgers: [
-      { id: 'burger-1', name: 'Классический', description: 'Две котлеты из говядины, чеддер, салат, томаты, соленые огурцы', price: 399, image: 'burger-classic.jpg', badge: 'hit' },
-      { id: 'burger-2', name: 'Острый', description: 'Говядина, халапеньо, бекон, острый соус, плавленый сыр', price: 449, image: 'burger-spicy.jpg', badge: 'sale', oldPrice: 549 },
-      { id: 'burger-3', name: 'Чикен', description: 'Хрустящая куриная грудка, салат, майонез, булочка бриошь', price: 379, image: 'burger-chicken.jpg' },
-      { id: 'burger-4', name: 'Двойной', description: 'Двойная котлета, двойной сыр, бекон, фирменный соус', price: 549, image: 'burger-double.jpg', badge: 'new' }
+      { id: 'burger-1', name: 'Классический', description: 'Две котлеты из говядины, чеддер, салат, томаты, соленые огурцы', price: 399, image: 'burger-classic.jpg', badge: 'hit', filterTags: ['with-beef'] },
+      { id: 'burger-2', name: 'Острый', description: 'Говядина, халапеньо, бекон, острый соус, плавленый сыр', price: 449, image: 'burger-spicy.jpg', badge: 'sale', oldPrice: 549, filterTags: ['sale', 'spicy', 'with-beef'] },
+      { id: 'burger-3', name: 'Чикен', description: 'Хрустящая куриная грудка, салат, майонез, булочка бриошь', price: 379, image: 'burger-chicken.jpg', filterTags: ['with-chicken'] },
+      { id: 'burger-4', name: 'Двойной', description: 'Двойная котлета, двойной сыр, бекон, фирменный соус', price: 549, image: 'burger-double.jpg', badge: 'new', filterTags: ['with-beef', 'double'] }
     ],
     drinks: [
       { id: 'drink-1', name: 'Кола', description: 'Классическая газировка, 0.5л', price: 99, image: 'drink-cola.jpg' },
       { id: 'drink-2', name: 'Апельсиновый сок', description: 'Свежевыжатый апельсиновый сок, 0.3л', price: 149, image: 'drink-juice.jpg', badge: 'new' },
       { id: 'drink-3', name: 'Молочный коктейль', description: 'Ванильный молочный коктейль со взбитыми сливками', price: 199, image: 'drink-milkshake.jpg' },
       { id: 'drink-4', name: 'Лимонад', description: 'Домашний лимонад с мятой и льдом, 0.4л', price: 129, image: 'drink-lemonade.jpg', badge: 'hit' }
+    ]
+  };
+
+  const categoryFilters = {
+    pizza: [
+      { id: 'sale', label: 'Акция', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>' },
+      { id: 'spicy', label: 'Острая', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>' },
+      { id: 'vegetarian', label: 'Вегетарианская', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>' },
+      { id: 'with-chicken', label: 'С курицей', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M15.5 3.5c-.3.3-.5.7-.5 1.1 0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5S17.3 3 16.5 3c-.4 0-.8.2-1 .5z"></path><path d="M8 14l-2.5 2.5M10 12l-4 4M14 8l-6 6"></path><path d="M18.5 5.5l-12 12"></path></svg>' },
+      { id: 'with-meat', label: 'С мясом', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12.5" cy="8.5" r="2.5"></circle><path d="M12.5 2a6.5 6.5 0 0 0-6.22 4.6c-1.1 3.13-.78 3.9-3.18 6.08A3 3 0 0 0 5 18c4 0 8.4-1.8 11.4-4.3A6.5 6.5 0 0 0 12.5 2z"></path></svg>' },
+      { id: 'cheese', label: 'Сырная', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M15 11h.01M11 15h.01M16 16h.01M2 16l20 6-6-20A20 20 0 0 0 2 16"></path></svg>' }
+    ],
+    rolls: [
+      { id: 'sale', label: 'Акция', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>' },
+      { id: 'hot', label: 'Хит', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"></polygon></svg>' },
+      { id: 'baked', label: 'Запечённые', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>' },
+      { id: 'with-salmon', label: 'С лососем', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6-3.56 0-7.56-2.53-8.5-6z"></path><path d="M2 10l4 2-4 2"></path></svg>' },
+      { id: 'with-eel', label: 'С угрём', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6-3.56 0-7.56-2.53-8.5-6z"></path><path d="M2 10l4 2-4 2"></path></svg>' },
+      { id: 'premium', label: 'Премиум', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path></svg>' }
     ]
   };
 
@@ -1216,6 +1235,91 @@
   }
 
   /* ========================================
+     CATEGORY PAGE (pizza.html, rolls.html, etc.)
+  ======================================== */
+  function initCategoryPage() {
+    var categorySection = document.querySelector('[data-category]');
+    if (!categorySection) return;
+
+    var categoryName = categorySection.dataset.category;
+    var items = menuCategories[categoryName];
+    if (!items) return;
+
+    var grid = document.getElementById('categoryGrid');
+    var filtersContainer = document.getElementById('categoryFilters');
+    var emptyState = document.getElementById('categoryEmpty');
+    var resetBtn = document.getElementById('categoryReset');
+    var selectedFilters = [];
+
+    // Render products
+    function renderProducts(filteredItems) {
+      grid.innerHTML = filteredItems.map(function(item) { return createProductCard(item); }).join('');
+      initProductCards(grid);
+
+      if (filteredItems.length === 0 && emptyState) {
+        emptyState.style.display = 'block';
+        grid.style.display = 'none';
+      } else {
+        if (emptyState) emptyState.style.display = 'none';
+        grid.style.display = '';
+      }
+    }
+
+    // Render filters
+    var filters = categoryFilters[categoryName];
+    if (filters && filtersContainer) {
+      filtersContainer.innerHTML = filters.map(function(f) {
+        return '<button class="menu-category__filter" data-filter-id="' + f.id + '">' +
+          '<span class="menu-category__filter-icon">' + f.icon + '</span> ' +
+          f.label +
+          '</button>';
+      }).join('');
+
+      filtersContainer.addEventListener('click', function(e) {
+        var btn = e.target.closest('.menu-category__filter');
+        if (!btn) return;
+        var filterId = btn.dataset.filterId;
+        var idx = selectedFilters.indexOf(filterId);
+        if (idx > -1) {
+          selectedFilters.splice(idx, 1);
+          btn.classList.remove('menu-category__filter--active');
+        } else {
+          selectedFilters.push(filterId);
+          btn.classList.add('menu-category__filter--active');
+        }
+        applyFilters();
+      });
+    }
+
+    function applyFilters() {
+      if (selectedFilters.length === 0) {
+        renderProducts(items);
+        return;
+      }
+      var filtered = items.filter(function(item) {
+        if (!item.filterTags) return false;
+        return selectedFilters.some(function(f) { return item.filterTags.indexOf(f) > -1; });
+      });
+      renderProducts(filtered);
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function() {
+        selectedFilters = [];
+        if (filtersContainer) {
+          filtersContainer.querySelectorAll('.menu-category__filter').forEach(function(btn) {
+            btn.classList.remove('menu-category__filter--active');
+          });
+        }
+        applyFilters();
+      });
+    }
+
+    // Initial render
+    renderProducts(items);
+  }
+
+  /* ========================================
      INITIALIZATION
   ======================================== */
   function init() {
@@ -1227,6 +1331,7 @@
     initConstructor();
     initCheckout();
     initCartSidebar();
+    initCategoryPage();
   }
 
   // Run on DOM ready

@@ -1537,6 +1537,140 @@ ul, ol {
   text-decoration: underline;
 }
 
+.menu-category__filter-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.menu-category__empty-text {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ========================================
+   BREADCRUMB BLOCK
+======================================== */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.breadcrumb__item {
+  color: var(--color-muted);
+  transition: color var(--transition-fast);
+}
+
+a.breadcrumb__item:hover {
+  color: var(--color-primary);
+}
+
+.breadcrumb__item--current {
+  color: var(--color-foreground);
+  font-weight: 500;
+}
+
+.breadcrumb__separator {
+  color: var(--color-muted);
+}
+
+/* ========================================
+   CATEGORY HERO BLOCK
+======================================== */
+.category-hero {
+  padding-top: 7rem;
+  padding-bottom: 2rem;
+  background: var(--color-secondary);
+}
+
+.category-hero__title {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+.category-hero__subtitle {
+  color: var(--color-muted);
+  font-size: 1.125rem;
+}
+
+/* ========================================
+   SEO TEXT BLOCK
+======================================== */
+.seo-text {
+  padding: 3rem 0;
+  background: var(--color-cream);
+}
+
+.seo-text__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--color-foreground);
+}
+
+.seo-text__content {
+  max-width: 50rem;
+  line-height: 1.8;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+}
+
+.seo-text__content p {
+  margin-bottom: 1rem;
+}
+
+.seo-text__content p:last-child {
+  margin-bottom: 0;
+}
+
+.seo-text__content a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+.seo-text__content a:hover {
+  color: var(--color-primary-dark);
+}
+
+.seo-text__content strong {
+  color: var(--color-foreground);
+  font-weight: 600;
+}
+
+.header__nav-link--active {
+  color: var(--color-primary);
+}
+
+.header__mobile-link--active {
+  color: var(--color-primary);
+}
+
+@media (min-width: 768px) {
+  .category-hero {
+    padding-top: 8rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .category-hero__title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .category-hero__title {
+    font-size: 3rem;
+  }
+
+  .seo-text__title {
+    font-size: 1.75rem;
+  }
+}
+
 /* ========================================
    PROMOTIONS BLOCK
 ======================================== */
