@@ -1,14 +1,15 @@
 import { ShoppingCart, Menu, X, Phone, MapPin, Clock } from 'lucide-react';
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCartStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import logo from '@/assets/logo.png';
 
 const menuNavLinks = [
-  { href: '#pizza', label: 'Пицца' },
-  { href: '#rolls', label: 'Роллы' },
-  { href: '#burgers', label: 'Бургеры' },
-  { href: '#drinks', label: 'Напитки' },
+  { href: '/pizza', label: 'Пицца' },
+  { href: '/rolls', label: 'Роллы' },
+  { href: '/burgers', label: 'Бургеры' },
+  { href: '/drinks', label: 'Напитки' },
 ];
 
 const topBarLinks = [
@@ -82,25 +83,24 @@ export function Header() {
         <div className="container mx-auto px-2 sm:px-4">
           <div className="flex items-center justify-between h-12 sm:h-16 md:h-20">
             {/* Logo */}
-            <a href="#" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <img 
                 src={logo} 
                 alt="Eagles Food" 
                 className="h-8 sm:h-12 md:h-16 w-auto"
               />
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
               {menuNavLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleSmoothScroll(e, link.href)}
+                  to={link.href}
                   className="nav-link text-sm uppercase tracking-wide"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
 
@@ -141,17 +141,14 @@ export function Header() {
                 <div className="pb-3 border-b border-border">
                   <span className="text-xs text-muted-foreground uppercase tracking-wide mb-2 block">Меню</span>
                   {menuNavLinks.map((link) => (
-                    <a
+                    <Link
                       key={link.href}
-                      href={link.href}
-                      onClick={(e) => {
-                        handleSmoothScroll(e, link.href);
-                        setMobileMenuOpen(false);
-                      }}
+                      to={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="nav-link text-base py-2 block"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
                 
