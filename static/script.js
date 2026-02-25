@@ -1322,6 +1322,46 @@
   /* ========================================
      INITIALIZATION
   ======================================== */
+  /* ========================================
+     HERO SLIDER
+  ======================================== */
+  function initHeroSlider() {
+    var slides = document.querySelectorAll('.hero__slide');
+    var dots = document.querySelectorAll('.hero__dot');
+    var prevBtn = document.querySelector('.hero__arrow--prev');
+    var nextBtn = document.querySelector('.hero__arrow--next');
+    if (!slides.length) return;
+
+    var current = 0;
+    var total = slides.length;
+    var autoplayInterval;
+
+    function goTo(index) {
+      slides[current].classList.remove('hero__slide--active');
+      dots[current].classList.remove('hero__dot--active');
+      current = (index + total) % total;
+      slides[current].classList.add('hero__slide--active');
+      dots[current].classList.add('hero__dot--active');
+    }
+
+    function startAutoplay() {
+      autoplayInterval = setInterval(function() { goTo(current + 1); }, 5000);
+    }
+
+    function resetAutoplay() {
+      clearInterval(autoplayInterval);
+      startAutoplay();
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); resetAutoplay(); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); resetAutoplay(); });
+    dots.forEach(function(dot, i) {
+      dot.addEventListener('click', function() { goTo(i); resetAutoplay(); });
+    });
+
+    startAutoplay();
+  }
+
   function init() {
     initSmoothScroll();
     initMobileMenu();
@@ -1332,6 +1372,7 @@
     initCheckout();
     initCartSidebar();
     initCategoryPage();
+    initHeroSlider();
   }
 
   // Run on DOM ready
