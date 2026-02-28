@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Minus, Plus, Trash2, ShoppingBag, Truck, Sparkles, Tag, X, Check, ArrowRight } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingBag, Truck, Sparkles, Tag, X, Check, ArrowRight, Zap } from 'lucide-react';
 import { useCartStore } from '@/lib/store';
 import { toast } from 'sonner';
 import { Progress } from '@/components/ui/progress';
+import { QuickOrderModal } from '@/components/QuickOrderModal';
 
 import drinkCola from '@/assets/drink-cola.jpg';
 import drinkMilkshake from '@/assets/drink-milkshake.jpg';
@@ -27,6 +28,7 @@ export function CartSidebar() {
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<{ code: string; discount: number } | null>(null);
   const [promoError, setPromoError] = useState('');
+  const [quickOrderOpen, setQuickOrderOpen] = useState(false);
 
   const totalPrice = getTotalPrice();
   const totalOldPrice = items.reduce((sum, item) => sum + (item.oldPrice || item.price) * item.quantity, 0);
@@ -319,10 +321,19 @@ export function CartSidebar() {
               >
                 Оформить заказ
               </Button>
+              <Button
+                onClick={() => { closeCart(); setQuickOrderOpen(true); }}
+                variant="outline"
+                className="w-full py-5 text-base rounded-2xl border-2 border-primary text-primary hover:bg-primary/10 font-semibold"
+              >
+                <Zap className="w-5 h-5 mr-2" />
+                Быстрый заказ
+              </Button>
             </div>
           </>
         )}
       </SheetContent>
+      <QuickOrderModal open={quickOrderOpen} onOpenChange={setQuickOrderOpen} />
     </Sheet>
   );
 }
