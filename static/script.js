@@ -466,6 +466,104 @@
     elements.toastAction.addEventListener('click', openCart);
 
     window.addEventListener('resize', updateMobileCart);
+
+    // Quick order button in cart
+    var quickOrderBtn = document.getElementById('quickOrderBtn');
+    if (quickOrderBtn) {
+      quickOrderBtn.addEventListener('click', function() {
+        closeCart();
+        openQuickOrder();
+      });
+    }
+  }
+
+  /* ========================================
+     QUICK ORDER MODAL
+  ======================================== */
+  function openQuickOrder() {
+    var overlay = document.getElementById('quickOrderOverlay');
+    if (!overlay) return;
+    overlay.classList.add('quick-order-overlay--visible');
+    document.body.style.overflow = 'hidden';
+    // Update total
+    var totalEl = document.getElementById('quickOrderTotal');
+    if (totalEl) totalEl.textContent = formatPrice(getTotalPrice());
+    // Autofocus phone
+    setTimeout(function() {
+      var phoneInput = document.getElementById('quickOrderPhone');
+      if (phoneInput) phoneInput.focus();
+    }, 100);
+  }
+
+  function closeQuickOrder() {
+    var overlay = document.getElementById('quickOrderOverlay');
+    if (!overlay) return;
+    overlay.classList.remove('quick-order-overlay--visible');
+    document.body.style.overflow = '';
+  }
+
+  function formatPhoneMask(value) {
+    var digits = value.replace(/\D/g, '');
+    if (digits.startsWith('7')) digits = digits.slice(1);
+    else if (digits.startsWith('8')) digits = digits.slice(1);
+    if (digits.length > 10) digits = digits.slice(0, 10);
+
+    var result = '+7';
+    if (digits.length > 0) result += ' (' + digits.slice(0, 3);
+    if (digits.length >= 3) result += ') ';
+    if (digits.length > 3) result += digits.slice(3, 6);
+    if (digits.length > 6) result += '-' + digits.slice(6, 8);
+    if (digits.length > 8) result += '-' + digits.slice(8, 10);
+    return result;
+  }
+
+  function initQuickOrder() {
+    var overlay = document.getElementById('quickOrderOverlay');
+    var closeBtn = document.getElementById('quickOrderClose');
+    var phoneInput = document.getElementById('quickOrderPhone');
+    var submitBtn = document.getElementById('quickOrderSubmit');
+    var nameInput = document.getElementById('quickOrderName');
+
+    if (!overlay) return;
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeQuickOrder();
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeQuickOrder);
+
+    if (phoneInput) {
+      phoneInput.addEventListener('input', function() {
+        this.value = formatPhoneMask(this.value);
+      });
+    }
+
+    if (submitBtn) {
+      submitBtn.addEventListener('click', function() {
+        var phone = phoneInput ? phoneInput.value.replace(/\D/g, '') : '';
+        var name = nameInput ? nameInput.value.trim() : '';
+
+        if (phone.length < 11) {
+          showToast('Введите корректный номер телефона');
+          return;
+        }
+        if (!name) {
+          showToast('Введите ваше имя');
+          return;
+        }
+        if (cart.length === 0) {
+          showToast('Корзина пуста');
+          return;
+        }
+
+        showToast('Заказ оформлен! Мы перезвоним вам.');
+        cart = [];
+        updateCartUI();
+        closeQuickOrder();
+        if (phoneInput) phoneInput.value = '+7';
+        if (nameInput) nameInput.value = '';
+      });
+    }
   }
 
   /* ========================================
@@ -1199,6 +1297,15 @@
     cartClose.addEventListener('click', closeCartSidebar);
     cartOverlay.addEventListener('click', closeCartSidebar);
 
+    // Quick order button inside cart sidebar
+    var quickOrderBtnSidebar = document.getElementById('quickOrderBtn');
+    if (quickOrderBtnSidebar) {
+      quickOrderBtnSidebar.addEventListener('click', function() {
+        closeCartSidebar();
+        openQuickOrder();
+      });
+    }
+
     cartContent.addEventListener('click', function(e) {
       const item = e.target.closest('.cart__item');
       if (!item) return;
@@ -1373,6 +1480,7 @@
     initCartSidebar();
     initCategoryPage();
     initHeroSlider();
+    initQuickOrder();
   }
 
   // Run on DOM ready
