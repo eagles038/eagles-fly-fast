@@ -103,7 +103,94 @@
 
     <section class="menu-category" data-category="burgers">
       <div class="container">
-        <div class="menu-category__grid" id="categoryGrid"></div>
+        <div class="menu-category__grid" id="categoryGrid">
+          <article class="product-card" data-product-id="burger-1" data-filter-tags="with-beef">
+            <div class="product-card__image-wrap">
+              <span class="product-card__badge product-card__badge--hit">Хит</span>
+              <img src="burger-classic.jpg" alt="Классический" class="product-card__image" loading="lazy">
+            </div>
+            <div class="product-card__body">
+              <h3 class="product-card__name">Классический</h3>
+              <p class="product-card__description">Две котлеты из говядины, чеддер, салат, томаты, соленые огурцы</p>
+              <div class="product-card__footer">
+                <div><span class="product-card__price" data-base-price="399">399 ₽</span></div>
+                <div class="product-card__actions">
+                  <div class="product-card__quantity">
+                    <button class="product-card__qty-btn" data-qty-action="decrease"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                    <span class="product-card__qty-value">1</span>
+                    <button class="product-card__qty-btn" data-qty-action="increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                  </div>
+                  <button class="product-card__add-btn" data-add-to-cart><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></button>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-card" data-product-id="burger-2" data-filter-tags="sale,spicy,with-beef">
+            <div class="product-card__image-wrap">
+              <span class="product-card__badge product-card__badge--sale">Акция</span>
+              <img src="burger-spicy.jpg" alt="Острый" class="product-card__image" loading="lazy">
+            </div>
+            <div class="product-card__body">
+              <h3 class="product-card__name">Острый</h3>
+              <p class="product-card__description">Говядина, халапеньо, бекон, острый соус, плавленый сыр</p>
+              <div class="product-card__footer">
+                <div>
+                  <span class="product-card__price" data-base-price="449">449 ₽</span>
+                  <span class="product-card__old-price">549 ₽</span>
+                </div>
+                <div class="product-card__actions">
+                  <div class="product-card__quantity">
+                    <button class="product-card__qty-btn" data-qty-action="decrease"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                    <span class="product-card__qty-value">1</span>
+                    <button class="product-card__qty-btn" data-qty-action="increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                  </div>
+                  <button class="product-card__add-btn" data-add-to-cart><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></button>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-card" data-product-id="burger-3" data-filter-tags="with-chicken">
+            <div class="product-card__image-wrap">
+              <img src="burger-chicken.jpg" alt="Чикен" class="product-card__image" loading="lazy">
+            </div>
+            <div class="product-card__body">
+              <h3 class="product-card__name">Чикен</h3>
+              <p class="product-card__description">Хрустящая куриная грудка, салат, майонез, булочка бриошь</p>
+              <div class="product-card__footer">
+                <div><span class="product-card__price" data-base-price="379">379 ₽</span></div>
+                <div class="product-card__actions">
+                  <div class="product-card__quantity">
+                    <button class="product-card__qty-btn" data-qty-action="decrease"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                    <span class="product-card__qty-value">1</span>
+                    <button class="product-card__qty-btn" data-qty-action="increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                  </div>
+                  <button class="product-card__add-btn" data-add-to-cart><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></button>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-card" data-product-id="burger-4" data-filter-tags="with-beef,double">
+            <div class="product-card__image-wrap">
+              <span class="product-card__badge product-card__badge--new">New</span>
+              <img src="burger-double.jpg" alt="Двойной" class="product-card__image" loading="lazy">
+            </div>
+            <div class="product-card__body">
+              <h3 class="product-card__name">Двойной</h3>
+              <p class="product-card__description">Двойная котлета, двойной сыр, бекон, фирменный соус</p>
+              <div class="product-card__footer">
+                <div><span class="product-card__price" data-base-price="549">549 ₽</span></div>
+                <div class="product-card__actions">
+                  <div class="product-card__quantity">
+                    <button class="product-card__qty-btn" data-qty-action="decrease"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                    <span class="product-card__qty-value">1</span>
+                    <button class="product-card__qty-btn" data-qty-action="increase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                  </div>
+                  <button class="product-card__add-btn" data-add-to-cart><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 

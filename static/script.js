@@ -711,7 +711,7 @@
   function initPopular() {
     if (!elements.popularTrack) return;
 
-    elements.popularTrack.innerHTML = popularItems.map(item => createProductCard(item)).join('');
+    // Products are now in HTML, just init event listeners
     initProductCards(elements.popularTrack);
 
     // Carousel navigation
@@ -728,11 +728,10 @@
      MENU SECTIONS
   ======================================== */
   function initMenu() {
-    Object.keys(menuCategories).forEach(category => {
-      const grid = elements[category + 'Grid'];
+    // Products are now in HTML, just init event listeners
+    ['pizza', 'rolls', 'burgers', 'drinks'].forEach(function(category) {
+      var grid = elements[category + 'Grid'];
       if (!grid) return;
-
-      grid.innerHTML = menuCategories[category].map(item => createProductCard(item)).join('');
       initProductCards(grid);
     });
   }
@@ -1348,40 +1347,17 @@
     var categorySection = document.querySelector('[data-category]');
     if (!categorySection) return;
 
-    var categoryName = categorySection.dataset.category;
-    var items = menuCategories[categoryName];
-    if (!items) return;
-
     var grid = document.getElementById('categoryGrid');
     var filtersContainer = document.getElementById('categoryFilters');
     var emptyState = document.getElementById('categoryEmpty');
     var resetBtn = document.getElementById('categoryReset');
     var selectedFilters = [];
 
-    // Render products
-    function renderProducts(filteredItems) {
-      grid.innerHTML = filteredItems.map(function(item) { return createProductCard(item); }).join('');
-      initProductCards(grid);
+    // Products and filters are now in HTML, just init event listeners
+    if (grid) initProductCards(grid);
 
-      if (filteredItems.length === 0 && emptyState) {
-        emptyState.style.display = 'block';
-        grid.style.display = 'none';
-      } else {
-        if (emptyState) emptyState.style.display = 'none';
-        grid.style.display = '';
-      }
-    }
-
-    // Render filters
-    var filters = categoryFilters[categoryName];
-    if (filters && filtersContainer) {
-      filtersContainer.innerHTML = filters.map(function(f) {
-        return '<button class="menu-category__filter" data-filter-id="' + f.id + '">' +
-          '<span class="menu-category__filter-icon">' + f.icon + '</span> ' +
-          f.label +
-          '</button>';
-      }).join('');
-
+    // Filter logic — show/hide existing cards
+    if (filtersContainer) {
       filtersContainer.addEventListener('click', function(e) {
         var btn = e.target.closest('.menu-category__filter');
         if (!btn) return;
@@ -1399,15 +1375,25 @@
     }
 
     function applyFilters() {
-      if (selectedFilters.length === 0) {
-        renderProducts(items);
-        return;
-      }
-      var filtered = items.filter(function(item) {
-        if (!item.filterTags) return false;
-        return selectedFilters.some(function(f) { return item.filterTags.indexOf(f) > -1; });
+      if (!grid) return;
+      var cards = grid.querySelectorAll('.product-card');
+      var visibleCount = 0;
+
+      cards.forEach(function(card) {
+        if (selectedFilters.length === 0) {
+          card.style.display = '';
+          visibleCount++;
+          return;
+        }
+        var tags = (card.dataset.filterTags || '').split(',');
+        var match = selectedFilters.some(function(f) { return tags.indexOf(f) > -1; });
+        card.style.display = match ? '' : 'none';
+        if (match) visibleCount++;
       });
-      renderProducts(filtered);
+
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 && selectedFilters.length > 0 ? 'block' : 'none';
+      }
     }
 
     if (resetBtn) {
@@ -1421,9 +1407,6 @@
         applyFilters();
       });
     }
-
-    // Initial render
-    renderProducts(items);
   }
 
   /* ========================================
