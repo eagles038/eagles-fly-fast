@@ -348,27 +348,29 @@
   function renderCartItems() {
     elements.cartItems.innerHTML = cart.map(item => {
       const uniqueId = generateUniqueId(item);
+      const oldPriceHtml = item.oldPrice ? `<span class="cart__item-old-price">${formatPrice(item.oldPrice * item.quantity)}</span>` : '';
       return `
         <div class="cart__item" data-id="${uniqueId}">
           <img src="${item.image}" alt="${item.name}" class="cart__item-image">
           <div class="cart__item-info">
             <h4 class="cart__item-name">${item.name}</h4>
-            <p class="cart__item-price">${formatPrice(item.price * item.quantity)}</p>
-            <div class="cart__item-footer">
-              <div class="cart__item-quantity">
-                <button class="cart__item-qty-btn" data-action="decrease" data-id="${uniqueId}">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                </button>
-                <span class="cart__item-qty-value">${item.quantity}</span>
-                <button class="cart__item-qty-btn" data-action="increase" data-id="${uniqueId}">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                </button>
-              </div>
-              <button class="cart__item-remove" data-action="remove" data-id="${uniqueId}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"></polyline><path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6M8,6V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6"></path></svg>
-              </button>
+            <div class="cart__item-prices">
+              <span class="cart__item-price">${formatPrice(item.price * item.quantity)}</span>
+              ${oldPriceHtml}
             </div>
           </div>
+          <div class="cart__item-quantity">
+            <button class="cart__item-qty-btn" data-action="decrease" data-id="${uniqueId}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <span class="cart__item-qty-value">${item.quantity}</span>
+            <button class="cart__item-qty-btn" data-action="increase" data-id="${uniqueId}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+          </div>
+          <button class="cart__item-remove" data-action="remove" data-id="${uniqueId}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"></polyline><path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6M8,6V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V6"></path></svg>
+          </button>
         </div>
       `;
     }).join('');
@@ -382,7 +384,7 @@
     const deliveryFee = remaining > 0 ? DELIVERY_PRICE : 0;
     const total = finalPrice + deliveryFee;
 
-    elements.cartSubtotal.textContent = formatPrice(subtotal);
+    // Subtotal row removed from compact layout
 
     if (discountAmount > 0) {
       elements.discountRow.classList.remove('cart__total-row--hidden');
