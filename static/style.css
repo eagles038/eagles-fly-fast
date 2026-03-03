@@ -3959,7 +3959,59 @@ a.breadcrumb__item:hover {
   text-decoration: underline;
 }
 
-@media (min-width: 640px) {
+/* Delivery Time */
+.checkout-time {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.checkout-time__option {
+  cursor: pointer;
+}
+
+.checkout-time__radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkout-time__content {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--color-secondary);
+  border-radius: var(--radius-lg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  border: 2px solid transparent;
+}
+
+.checkout-time__radio:checked + .checkout-time__content {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.checkout-time__scheduled {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-left: 1rem;
+}
+
+.checkout-time__date-input {
+  flex: 1;
+  max-width: 12rem;
+}
+
+.checkout-time__time-input {
+  width: 8rem;
+}
+
+
   .checkout-form__row {
     grid-template-columns: repeat(2, 1fr);
   }
