@@ -1289,7 +1289,7 @@
           </svg>
           <input type="text" class="cart__promo-input" id="promoInput" placeholder="Промокод">
         </div>
-        <button class="button button--outline cart__promo-btn" id="promoBtn">Применить</button>
+        <button class="button button--outline cart__promo-btn" id="promoBtn">OK</button>
       </div>
       <div class="cart__promo-applied cart__promo-applied--hidden" id="promoApplied">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1302,10 +1302,6 @@
       <p class="cart__promo-error cart__promo-error--hidden" id="promoError">Промокод не найден</p>
 
       <div class="cart__totals">
-        <div class="cart__total-row">
-          <span>Сумма заказа</span>
-          <span id="cartSubtotal">0 ₽</span>
-        </div>
         <div class="cart__total-row cart__total-row--discount cart__total-row--hidden" id="discountRow">
           <span>Скидка</span>
           <span id="cartDiscount">-0 ₽</span>
@@ -1320,12 +1316,12 @@
         </div>
       </div>
 
-      <button class="button button--primary button--large cart__checkout-btn" id="checkoutBtn">
-        Оформить заказ
-      </button>
-      <button class="button button--outline button--large cart__checkout-btn" id="quickOrderBtn" style="margin-top: 0.5rem; border: 2px solid var(--color-primary); color: var(--color-primary);">
-        ⚡ Быстрый заказ
-      </button>
+      <div class="cart__buttons">
+        <button class="button button--primary button--large cart__checkout-btn" id="checkoutBtn">
+          Оформить заказ
+        </button>
+        <button class="cart__quick-order-btn" id="quickOrderBtn" title="Быстрый заказ">⚡</button>
+      </div>
     </div>
   </aside>
 
