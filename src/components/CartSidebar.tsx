@@ -84,18 +84,18 @@ export function CartSidebar() {
   return (
     <Sheet open={isOpen} onOpenChange={closeCart}>
       <SheetContent className="w-full sm:max-w-lg flex flex-col p-0 gap-0 h-full max-h-[100dvh]">
-        {/* Header */}
-        <SheetHeader className="p-6 pb-4 border-b border-border">
+        {/* Header — compact on mobile */}
+        <SheetHeader className="p-3 sm:p-6 sm:pb-4 border-b border-border">
           <SheetTitle className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <ShoppingBag className="w-5 h-5 text-primary" />
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
               </div>
               <div>
-                <span className="text-xl font-bold">Ваш заказ</span>
-                <p className="text-sm text-muted-foreground font-normal">
+                <span className="text-base sm:text-xl font-bold">Ваш заказ</span>
+                <span className="text-xs sm:text-sm text-muted-foreground font-normal ml-2 sm:ml-0 sm:block">
                   {items.length} {items.length === 1 ? 'позиция' : items.length < 5 ? 'позиции' : 'позиций'}
-                </p>
+                </span>
               </div>
             </div>
           </SheetTitle>
@@ -116,22 +116,22 @@ export function CartSidebar() {
           </div>
         ) : (
           <>
-            {/* Delivery Progress */}
-            <div className="px-6 py-4 bg-secondary/50">
-              <div className="flex items-center gap-3 mb-2">
-                <Truck className="w-5 h-5 text-primary" />
+            {/* Delivery Progress — compact on mobile */}
+            <div className="px-3 py-2 sm:px-6 sm:py-4 bg-secondary/50">
+              <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-2">
+                <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
                 {remainingForFreeDelivery > 0 ? (
-                  <span className="text-sm">
+                  <span className="text-xs sm:text-sm">
                     До бесплатной доставки: <strong className="text-primary">{remainingForFreeDelivery} ₽</strong>
                   </span>
                 ) : (
-                  <span className="text-sm font-medium flex items-center gap-1 text-primary">
-                    <Sparkles className="w-4 h-4" />
+                  <span className="text-xs sm:text-sm font-medium flex items-center gap-1 text-primary">
+                    <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
                     Бесплатная доставка!
                   </span>
                 )}
               </div>
-              <Progress value={deliveryProgress} className="h-2" />
+              <Progress value={deliveryProgress} className="h-1.5 sm:h-2" />
             </div>
 
             {/* Cart Items */}
@@ -229,16 +229,16 @@ export function CartSidebar() {
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="border-t border-border p-4 sm:p-6 space-y-3 sm:space-y-4 bg-background flex-shrink-0">
+            {/* Footer — compact on mobile */}
+            <div className="border-t border-border p-3 sm:p-6 space-y-2 sm:space-y-4 bg-background flex-shrink-0">
               {/* Promo Code */}
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 {appliedPromo ? (
-                  <div className="flex items-center justify-between p-3 bg-primary/10 rounded-xl border border-primary/20">
+                  <div className="flex items-center justify-between p-2 sm:p-3 bg-primary/10 rounded-xl border border-primary/20">
                     <div className="flex items-center gap-2">
                       <Check className="w-4 h-4 text-primary" />
-                      <span className="font-medium text-sm">{appliedPromo.code}</span>
-                      <span className="text-primary font-bold">-{appliedPromo.discount * 100}%</span>
+                      <span className="font-medium text-xs sm:text-sm">{appliedPromo.code}</span>
+                      <span className="text-primary font-bold text-xs sm:text-sm">-{appliedPromo.discount * 100}%</span>
                     </div>
                     <button
                       onClick={handleRemovePromo}
@@ -258,13 +258,13 @@ export function CartSidebar() {
                           setPromoError('');
                         }}
                         placeholder="Промокод"
-                        className={`pl-10 rounded-xl ${promoError ? 'border-destructive' : ''}`}
+                        className={`pl-10 rounded-xl h-9 sm:h-10 text-sm ${promoError ? 'border-destructive' : ''}`}
                       />
                     </div>
                     <Button
                       onClick={handleApplyPromo}
                       variant="outline"
-                      className="rounded-xl px-4"
+                      className="rounded-xl px-3 sm:px-4 h-9 sm:h-10 text-xs sm:text-sm"
                       disabled={!promoCode.trim()}
                     >
                       Применить
@@ -272,13 +272,13 @@ export function CartSidebar() {
                   </div>
                 )}
                 {promoError && (
-                  <p className="text-sm text-destructive">{promoError}</p>
+                  <p className="text-xs sm:text-sm text-destructive">{promoError}</p>
                 )}
               </div>
 
-              {/* Totals */}
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
+              {/* Totals — single row on mobile, detailed on desktop */}
+              <div className="space-y-1 sm:space-y-2">
+                <div className="hidden sm:flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Сумма заказа</span>
                   <div className="flex items-center gap-2">
                     <span>{totalPrice} ₽</span>
@@ -288,18 +288,18 @@ export function CartSidebar() {
                   </div>
                 </div>
                 {productDiscount > 0 && (
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="hidden sm:flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Скидка на товары</span>
                     <span className="text-primary font-medium">-{productDiscount} ₽</span>
                   </div>
                 )}
                 {appliedPromo && (
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="hidden sm:flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Промокод ({appliedPromo.code})</span>
                     <span className="text-primary font-medium">-{discountAmount} ₽</span>
                   </div>
                 )}
-                <div className="flex items-center justify-between text-sm">
+                <div className="hidden sm:flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Доставка</span>
                   {remainingForFreeDelivery > 0 ? (
                     <span>200 ₽</span>
@@ -307,9 +307,9 @@ export function CartSidebar() {
                     <span className="text-primary font-medium">Бесплатно</span>
                   )}
                 </div>
-                <div className="flex items-center justify-between pt-2 border-t border-border">
-                  <span className="font-semibold">Итого</span>
-                  <p className="text-2xl font-bold text-primary">
+                <div className="flex items-center justify-between pt-1 sm:pt-2 border-t border-border">
+                  <span className="font-semibold text-sm sm:text-base">Итого</span>
+                  <p className="text-xl sm:text-2xl font-bold text-primary">
                     {remainingForFreeDelivery > 0 ? finalPrice + 200 : finalPrice} ₽
                   </p>
                 </div>
@@ -317,16 +317,16 @@ export function CartSidebar() {
 
               <Button
                 onClick={handleOrder}
-                className="w-full btn-primary py-6 text-lg rounded-2xl"
+                className="w-full btn-primary py-4 sm:py-6 text-base sm:text-lg rounded-2xl"
               >
                 Оформить заказ
               </Button>
               <Button
                 onClick={() => { closeCart(); setQuickOrderOpen(true); }}
                 variant="outline"
-                className="w-full py-5 text-base rounded-2xl border-2 border-primary text-primary hover:bg-primary/10 font-semibold"
+                className="w-full py-3 sm:py-5 text-sm sm:text-base rounded-2xl border-2 border-primary text-primary hover:bg-primary/10 font-semibold"
               >
-                <Zap className="w-5 h-5 mr-2" />
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Быстрый заказ
               </Button>
             </div>
