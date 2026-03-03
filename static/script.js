@@ -1135,10 +1135,30 @@
           pickupFields.style.display = 'block';
         }
         updateCheckoutUI();
+        updateDeliveryTimeLabel();
       });
     });
 
-    // Promo code
+    // Delivery time toggle
+    var deliveryTimeRadios = document.querySelectorAll('input[name="delivery_time"]');
+    var scheduledTimeFields = document.getElementById('scheduledTimeFields');
+    if (deliveryTimeRadios.length && scheduledTimeFields) {
+      deliveryTimeRadios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+          scheduledTimeFields.style.display = this.value === 'scheduled' ? 'flex' : 'none';
+        });
+      });
+    }
+
+    // Update delivery time label based on delivery type
+    function updateDeliveryTimeLabel() {
+      var label = document.querySelector('#deliveryTimeSection').closest('.checkout-form__field').querySelector('.checkout-form__label');
+      if (label) {
+        var svgHTML = label.querySelector('svg') ? label.querySelector('svg').outerHTML : '';
+        label.innerHTML = svgHTML + ' Время ' + (deliveryType === 'delivery' ? 'доставки' : 'самовывоза');
+      }
+    }
+
     applyPromoBtn.addEventListener('click', function() {
       const code = promoInput.value.toUpperCase().trim();
       if (PROMO_CODES[code]) {
