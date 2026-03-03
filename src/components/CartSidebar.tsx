@@ -3,28 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Minus, Plus, Trash2, ShoppingBag, Truck, Sparkles, Tag, X, Check, ArrowRight, Zap } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingBag, Truck, Tag, X, Check, Zap } from 'lucide-react';
 import { useCartStore } from '@/lib/store';
 import { toast } from 'sonner';
 import { Progress } from '@/components/ui/progress';
 import { QuickOrderModal } from '@/components/QuickOrderModal';
 
-import drinkCola from '@/assets/drink-cola.jpg';
-import drinkMilkshake from '@/assets/drink-milkshake.jpg';
-import drinkLemonade from '@/assets/drink-lemonade.jpg';
-
-// Рекомендуемые товары для допродажи
-const recommendedItems = [
-  { id: 'rec-cola', name: 'Coca-Cola', price: 99, image: drinkCola },
-  { id: 'rec-milkshake', name: 'Милкшейк', price: 199, image: drinkMilkshake },
-  { id: 'rec-lemonade', name: 'Лимонад', price: 149, image: drinkLemonade },
-];
-
 const FREE_DELIVERY_THRESHOLD = 1500;
 
 export function CartSidebar() {
   const navigate = useNavigate();
-  const { items, isOpen, closeCart, updateQuantity, removeItem, getTotalPrice, clearCart, addItem, openCart } = useCartStore();
+  const { items, isOpen, closeCart, updateQuantity, removeItem, getTotalPrice, clearCart } = useCartStore();
   const [promoCode, setPromoCode] = useState('');
   const [appliedPromo, setAppliedPromo] = useState<{ code: string; discount: number } | null>(null);
   const [promoError, setPromoError] = useState('');
@@ -69,21 +58,9 @@ export function CartSidebar() {
     navigate('/checkout');
   };
 
-  const handleAddRecommended = (item: typeof recommendedItems[0]) => {
-    addItem({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      image: item.image,
-    });
-    toast.success(`${item.name} добавлен`, {
-      action: { label: 'Отменить', onClick: () => removeItem(item.id) },
-    });
-  };
-
   return (
     <Sheet open={isOpen} onOpenChange={closeCart}>
-      <SheetContent className="w-full sm:max-w-lg flex flex-col p-0 gap-0 h-full max-h-[100dvh]">
+      <SheetContent className="w-full sm:max-w-md flex flex-col p-0 gap-0 h-full max-h-[100dvh]">
         {/* Header — compact on mobile */}
         <SheetHeader className="p-3 sm:p-6 sm:pb-4 border-b border-border">
           <SheetTitle className="flex items-center justify-between">
@@ -126,7 +103,7 @@ export function CartSidebar() {
                   </span>
                 ) : (
                   <span className="text-xs sm:text-sm font-medium flex items-center gap-1 text-primary">
-                    <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <Check className="w-3 h-3 sm:w-4 sm:h-4" />
                     Бесплатная доставка!
                   </span>
                 )}
@@ -147,110 +124,77 @@ export function CartSidebar() {
                   return (
                     <div
                       key={uniqueId}
-                      className="flex gap-4 p-4 bg-background rounded-2xl border border-border shadow-sm animate-fade-in"
+                      className="flex items-center gap-3 p-2.5 bg-background rounded-xl border border-border animate-fade-in"
                     >
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-20 h-20 rounded-xl object-cover flex-shrink-0"
+                        className="w-14 h-14 rounded-lg object-cover flex-shrink-0"
                       />
-                      <div className="flex-1 min-w-0 flex flex-col justify-between">
-                        <div>
-                          <h4 className="font-semibold text-sm leading-tight line-clamp-2">{item.name}</h4>
-                          <div className="flex items-center gap-2 mt-1">
-                            <p className="text-lg font-bold text-primary">
-                              {item.price * item.quantity} ₽
-                            </p>
-                            {item.oldPrice && (
-                              <p className="text-sm text-muted-foreground line-through">
-                                {item.oldPrice * item.quantity} ₽
-                              </p>
-                            )}
-                          </div>
-                        </div>
-
-                        <div className="flex items-center justify-between mt-2">
-                          <div className="flex items-center gap-1 bg-secondary rounded-full p-1">
-                            <button
-                              onClick={() => updateQuantity(uniqueId, item.quantity - 1)}
-                              className="w-7 h-7 rounded-full bg-background flex items-center justify-center hover:bg-muted transition-colors shadow-sm"
-                            >
-                              <Minus className="w-3 h-3" />
-                            </button>
-                            <span className="w-8 text-center font-bold text-sm">
-                              {item.quantity}
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-sm leading-tight truncate">{item.name}</h4>
+                        <div className="flex items-center gap-2 mt-0.5">
+                          <span className="text-sm font-bold text-primary">
+                            {item.price * item.quantity} ₽
+                          </span>
+                          {item.oldPrice && (
+                            <span className="text-xs text-muted-foreground line-through">
+                              {item.oldPrice * item.quantity} ₽
                             </span>
-                            <button
-                              onClick={() => updateQuantity(uniqueId, item.quantity + 1)}
-                              className="w-7 h-7 rounded-full bg-background flex items-center justify-center hover:bg-muted transition-colors shadow-sm"
-                            >
-                              <Plus className="w-3 h-3" />
-                            </button>
-                          </div>
-                          <button
-                            onClick={() => removeItem(uniqueId)}
-                            className="w-8 h-8 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 flex items-center justify-center transition-colors"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                          )}
                         </div>
                       </div>
+                      <div className="flex items-center gap-1 bg-secondary rounded-full p-0.5 flex-shrink-0">
+                        <button
+                          onClick={() => updateQuantity(uniqueId, item.quantity - 1)}
+                          className="w-6 h-6 rounded-full bg-background flex items-center justify-center hover:bg-muted transition-colors"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="w-6 text-center font-bold text-xs">
+                          {item.quantity}
+                        </span>
+                        <button
+                          onClick={() => updateQuantity(uniqueId, item.quantity + 1)}
+                          className="w-6 h-6 rounded-full bg-background flex items-center justify-center hover:bg-muted transition-colors"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => removeItem(uniqueId)}
+                        className="w-7 h-7 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 flex items-center justify-center transition-colors flex-shrink-0"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                   );
                 })}
               </div>
-
-              {/* Recommended Items */}
-              <div className="px-6 pb-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <Sparkles className="w-5 h-5 text-primary" />
-                  <h4 className="font-bold text-base">Добавить к заказу</h4>
-                </div>
-                <div className="flex gap-4 overflow-x-auto pb-3 -mx-6 px-6 scrollbar-hide">
-                  {recommendedItems.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => handleAddRecommended(item)}
-                      className="flex-shrink-0 flex flex-col w-32 p-3 bg-secondary/50 hover:bg-secondary rounded-2xl border border-border hover:border-primary/30 transition-all group hover:shadow-md"
-                    >
-                      <div className="w-full aspect-square rounded-xl bg-muted overflow-hidden mb-3">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                      </div>
-                      <div className="text-left flex-1">
-                        <p className="font-semibold text-sm leading-tight mb-1">{item.name}</p>
-                        <p className="text-primary font-bold">{item.price} ₽</p>
-                      </div>
-                      <div className="w-full h-9 rounded-xl bg-primary/10 group-hover:bg-primary flex items-center justify-center transition-colors mt-3">
-                        <Plus className="w-5 h-5 text-primary group-hover:text-primary-foreground" />
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
             </div>
 
-            {/* Footer — compact on mobile */}
-            <div className="border-t border-border p-3 sm:p-6 space-y-2 sm:space-y-4 bg-background flex-shrink-0">
+            {/* Footer */}
+            <div className="border-t border-border p-3 space-y-2 bg-background flex-shrink-0">
               {/* Promo Code */}
               <div className="space-y-1.5">
                 {appliedPromo ? (
-                  <div className="flex items-center justify-between p-2 sm:p-3 bg-primary/10 rounded-xl border border-primary/20">
+                  <div className="flex items-center justify-between p-2 bg-primary/10 rounded-lg border border-primary/20">
                     <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-primary" />
-                      <span className="font-medium text-xs sm:text-sm">{appliedPromo.code}</span>
-                      <span className="text-primary font-bold text-xs sm:text-sm">-{appliedPromo.discount * 100}%</span>
+                      <Check className="w-3.5 h-3.5 text-primary" />
+                      <span className="font-medium text-xs">{appliedPromo.code}</span>
+                      <span className="text-primary font-bold text-xs">-{appliedPromo.discount * 100}%</span>
                     </div>
                     <button
                       onClick={handleRemovePromo}
-                      className="w-6 h-6 rounded-full hover:bg-destructive/10 flex items-center justify-center transition-colors"
+                      className="w-5 h-5 rounded-full hover:bg-destructive/10 flex items-center justify-center transition-colors"
                     >
-                      <X className="w-4 h-4 text-muted-foreground hover:text-destructive" />
+                      <X className="w-3.5 h-3.5 text-muted-foreground hover:text-destructive" />
                     </button>
                   </div>
                 ) : (
                   <div className="flex gap-2">
                     <div className="relative flex-1">
-                      <Tag className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <Tag className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
                       <Input
                         value={promoCode}
                         onChange={(e) => {
@@ -258,48 +202,33 @@ export function CartSidebar() {
                           setPromoError('');
                         }}
                         placeholder="Промокод"
-                        className={`pl-10 rounded-xl h-9 sm:h-10 text-sm ${promoError ? 'border-destructive' : ''}`}
+                        className={`pl-8 rounded-lg h-8 text-xs ${promoError ? 'border-destructive' : ''}`}
                       />
                     </div>
                     <Button
                       onClick={handleApplyPromo}
                       variant="outline"
-                      className="rounded-xl px-3 sm:px-4 h-9 sm:h-10 text-xs sm:text-sm"
+                      className="rounded-lg px-3 h-8 text-xs"
                       disabled={!promoCode.trim()}
                     >
-                      Применить
+                      OK
                     </Button>
                   </div>
                 )}
                 {promoError && (
-                  <p className="text-xs sm:text-sm text-destructive">{promoError}</p>
+                  <p className="text-xs text-destructive">{promoError}</p>
                 )}
               </div>
 
-              {/* Totals — single row on mobile, detailed on desktop */}
-              <div className="space-y-1 sm:space-y-2">
-                <div className="hidden sm:flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">Сумма заказа</span>
-                  <div className="flex items-center gap-2">
-                    <span>{totalPrice} ₽</span>
-                    {productDiscount > 0 && (
-                      <span className="text-muted-foreground line-through text-xs">{totalOldPrice} ₽</span>
-                    )}
-                  </div>
-                </div>
-                {productDiscount > 0 && (
-                  <div className="hidden sm:flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Скидка на товары</span>
-                    <span className="text-primary font-medium">-{productDiscount} ₽</span>
+              {/* Totals */}
+              <div className="space-y-1">
+                {totalDiscount > 0 && (
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-muted-foreground">Скидка</span>
+                    <span className="text-primary font-medium">-{totalDiscount} ₽</span>
                   </div>
                 )}
-                {appliedPromo && (
-                  <div className="hidden sm:flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Промокод ({appliedPromo.code})</span>
-                    <span className="text-primary font-medium">-{discountAmount} ₽</span>
-                  </div>
-                )}
-                <div className="hidden sm:flex items-center justify-between text-sm">
+                <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Доставка</span>
                   {remainingForFreeDelivery > 0 ? (
                     <span>200 ₽</span>
@@ -307,28 +236,30 @@ export function CartSidebar() {
                     <span className="text-primary font-medium">Бесплатно</span>
                   )}
                 </div>
-                <div className="flex items-center justify-between pt-1 sm:pt-2 border-t border-border">
-                  <span className="font-semibold text-sm sm:text-base">Итого</span>
-                  <p className="text-xl sm:text-2xl font-bold text-primary">
+                <div className="flex items-center justify-between pt-1 border-t border-border">
+                  <span className="font-semibold text-sm">Итого</span>
+                  <span className="text-lg font-bold text-primary">
                     {remainingForFreeDelivery > 0 ? finalPrice + 200 : finalPrice} ₽
-                  </p>
+                  </span>
                 </div>
               </div>
 
-              <Button
-                onClick={handleOrder}
-                className="w-full btn-primary py-4 sm:py-6 text-base sm:text-lg rounded-2xl"
-              >
-                Оформить заказ
-              </Button>
-              <Button
-                onClick={() => { closeCart(); setQuickOrderOpen(true); }}
-                variant="outline"
-                className="w-full py-3 sm:py-5 text-sm sm:text-base rounded-2xl border-2 border-primary text-primary hover:bg-primary/10 font-semibold"
-              >
-                <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Быстрый заказ
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  onClick={handleOrder}
+                  className="flex-1 btn-primary h-10 text-sm rounded-xl"
+                >
+                  Оформить заказ
+                </Button>
+                <Button
+                  onClick={() => { closeCart(); setQuickOrderOpen(true); }}
+                  variant="outline"
+                  className="h-10 px-3 rounded-xl border-2 border-primary text-primary hover:bg-primary/10"
+                  title="Быстрый заказ"
+                >
+                  <Zap className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
           </>
         )}
