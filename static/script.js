@@ -1454,6 +1454,78 @@
     startAutoplay();
   }
 
+  /* ========================================
+     COOKIE CONSENT
+  ======================================== */
+  function initCookieConsent() {
+    var banner = document.getElementById('cookieConsent');
+    if (!banner) return;
+    var consent = localStorage.getItem('cookie-consent');
+    if (consent) {
+      banner.style.display = 'none';
+      return;
+    }
+    document.getElementById('cookieAccept').addEventListener('click', function() {
+      localStorage.setItem('cookie-consent', 'accepted');
+      banner.classList.add('cookie-consent--hidden');
+      setTimeout(function() { banner.style.display = 'none'; }, 300);
+    });
+    document.getElementById('cookieDecline').addEventListener('click', function() {
+      localStorage.setItem('cookie-consent', 'declined');
+      banner.classList.add('cookie-consent--hidden');
+      setTimeout(function() { banner.style.display = 'none'; }, 300);
+    });
+  }
+
+  /* ========================================
+     EXIT INTENT POPUP
+  ======================================== */
+  function initExitIntent() {
+    var overlay = document.getElementById('exitIntentOverlay');
+    if (!overlay) return;
+
+    function closePopup() {
+      overlay.classList.remove('exit-intent-overlay--active');
+    }
+
+    function copyCode() {
+      var code = overlay.querySelector('.exit-intent__code').textContent;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code);
+      }
+      showToast('Промокод скопирован! Используйте ' + code + ' при оформлении заказа');
+    }
+
+    setTimeout(function() {
+      document.addEventListener('mouseleave', function(e) {
+        if (e.clientY <= 0) {
+          var seen = sessionStorage.getItem('exit-intent-shown');
+          if (!seen) {
+            overlay.classList.add('exit-intent-overlay--active');
+            sessionStorage.setItem('exit-intent-shown', 'true');
+          }
+        }
+      });
+    }, 3000);
+
+    var closeBtn = document.getElementById('exitIntentClose');
+    var noThanks = document.getElementById('exitIntentNoThanks');
+    var copyBtn = document.getElementById('exitIntentCopy');
+    var grabBtn = document.getElementById('exitIntentGrab');
+
+    if (closeBtn) closeBtn.addEventListener('click', closePopup);
+    if (noThanks) noThanks.addEventListener('click', closePopup);
+    if (copyBtn) copyBtn.addEventListener('click', copyCode);
+    if (grabBtn) grabBtn.addEventListener('click', function() {
+      copyCode();
+      closePopup();
+    });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closePopup();
+    });
+  }
+
   function init() {
     initSmoothScroll();
     initMobileMenu();
@@ -1466,6 +1538,8 @@
     initCategoryPage();
     initHeroSlider();
     initQuickOrder();
+    initCookieConsent();
+    initExitIntent();
   }
 
   // Run on DOM ready
