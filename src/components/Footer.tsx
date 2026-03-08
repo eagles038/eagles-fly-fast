@@ -10,11 +10,13 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="mb-4">
+            <div className="bg-background/90 rounded-xl p-2 inline-block">
               <img 
                 src={logo} 
                 alt="Eagles Food" 
                 className="h-14 w-auto"
               />
+            </div>
             </div>
             <p className="text-background/70 mb-6">
               Вкуснейшая пицца и сочные бургеры с доставкой за 30 минут
