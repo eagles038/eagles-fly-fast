@@ -10,11 +10,14 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="mb-4">
-              <img 
-                src={logo} 
-                alt="Eagles Food" 
-                className="h-16 w-auto"
-              />
+              <div className="flex flex-col items-start">
+                <img 
+                  src={logo} 
+                  alt="Eagles Food" 
+                  className="h-12 w-auto"
+                  style={{ filter: 'brightness(0) invert(1)' }}
+                />
+              </div>
             </div>
             <p className="text-background/70 mb-6">
               Вкуснейшая пицца и сочные бургеры с доставкой за 30 минут
