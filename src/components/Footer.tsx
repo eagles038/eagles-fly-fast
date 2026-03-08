@@ -9,12 +9,12 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div>
-            <div className="mb-4 flex items-center gap-3">
+            <div className="mb-4">
               <img 
                 src={logo} 
                 alt="Eagles Food" 
-                className="h-16 w-auto drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
-                style={{ filter: 'brightness(1.8) saturate(1.2)' }}
+                className="h-16 w-auto"
+                style={{ filter: 'brightness(0) invert(1) brightness(2)' }}
               />
             </div>
             <p className="text-background/70 mb-6">
