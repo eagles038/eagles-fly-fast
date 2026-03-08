@@ -13,7 +13,7 @@ export function Footer() {
               <img 
                 src={logo} 
                 alt="Eagles Food" 
-                className="h-14 w-auto"
+                className="h-14 w-auto brightness-0 invert"
               />
             </div>
             <p className="text-background/70 mb-6">
